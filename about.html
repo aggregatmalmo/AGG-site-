@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>About — AGGREGAT</title>
+  <meta name="description" content="About Aggregat — Malmö-based underground platform for events, label releases, and mix archives." />
+  <link rel="icon" href="assets/favicon.ico" />
+  <style>
+    :root { --bg:#141414; --fg:#f8f8f8; --muted:#a9a9a9; --border:#2a2a2a; --accent:#d3ff3a; }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{margin:0;background:var(--bg);color:var(--fg);font-family:Arial,Helvetica,sans-serif;line-height:1.55}
+    a{color:inherit;text-decoration:none}
+    .container{width:min(900px,92vw);margin:0 auto;padding:7vh 0}
+    header{position:fixed;inset:0 0 auto 0;z-index:40;padding:.8rem 0;border-bottom:1px solid var(--border);background:linear-gradient(180deg,rgba(20,20,20,.85),rgba(20,20,20,.4));backdrop-filter:blur(8px)}
+    .nav{display:flex;align-items:center;justify-content:space-between;gap:1rem;width:min(1100px,92vw);margin:0 auto}
+    .brand{font-weight:600;letter-spacing:.12em;text-transform:uppercase}
+    .brand .dot{display:inline-block;width:.55rem;height:.55rem;background:var(--accent);border-radius:999px;box-shadow:0 0 14px var(--accent);margin-right:.5rem}
+    .links{display:flex;gap:.9rem;align-items:center}
+    .links a{border:1px solid var(--border);border-radius:999px;padding:.35rem .7rem;color:var(--fg);font-weight:600;font-size:.8rem;background:#1c1c1c}
+    h1{font-size:2rem;margin-bottom:1rem;text-transform:uppercase;letter-spacing:.08em}
+    h2{margin-top:2.5rem;font-size:1.2rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+    p{margin:1rem 0}
+    ul{list-style:none;padding:0;margin:1rem 0}
+    ul li{margin:.4rem 0;font-weight:600}
+    footer{padding:6vh 0 8vh;color:var(--muted);border-top:1px solid var(--border)}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <div class="brand"><span class="dot"></span>AGGREGAT</div>
+      <nav class="links">
+        <a href="/AGG-site-/">Home</a>
+        <a href="about.html" class="active">About</a>
+        <a href="https://instagram.com/aggregat040" target="_blank" rel="noopener">IG</a>
+        <a href="#" target="_blank" rel="noopener">SC</a>
+        <a href="#" target="_blank" rel="noopener">FB</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <h1>About</h1>
+    <p><strong>AGGREGAT</strong> is a Malmö-based underground platform focused on <strong>events, label releases, and mix archives</strong>.</p>
+    <p>Originally founded by <strong>BXY Santiago</strong> together with friends, Aggregat has evolved into a curated system of open airs, club nights, and cross-disciplinary events exploring raw sound, visual identity, and uncompromising energy. Over the last couple of years, the platform has been <strong>led by BXY</strong>, working with a fluid network of artists and collaborators.</p>
+    <p>Aggregat has partnered with clubs, collectives, and cultural institutions across Malmö — developing an independent voice rooted in DIY ethics, inclusivity, and underground pressure.</p>
+    <p>In 2025, Aggregat expands into label territory with the release of its first various artists compilation, <strong>RAFT001</strong>, curated by <strong>BXY Santiago and Christoffer Pollizoni</strong>.</p>
+    <p><strong>Events. Label. Mixseries. No ceilings. Just pressure.</strong></p>
+
+    <h2>Residents</h2>
+    <ul>
+      <li>BXY SANTIAGO (founder)</li>
+      <li>MONTY PARTY</li>
+      <li>NYKTON</li>
+      <li>TINDRA</li>
+    </ul>
+
+    <h2>Contact</h2>
+    <p>Email: <a href="mailto:hello@aggregat040.com">hello@aggregat040.com</a></p>
+    <p>Instagram: <a href="https://instagram.com/aggregat040" target="_blank">@aggregat040</a></p>
+  </main>
+
+  <footer>
+    <div class="container" style="display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;">
+      <div class="meta">© <span id="year"></span> AGGREGAT</div>
+      <div class="links">
+        <a href="https://instagram.com/aggregat040" target="_blank" rel="noopener">Instagram</a>
+        <a href="#" target="_blank" rel="noopener">SoundCloud</a>
+        <a href="#" target="_blank" rel="noopener">Facebook</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

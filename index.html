@@ -1,0 +1,329 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>aggregat — underground culture</title>
+  <meta name="description" content="aggregat040 — parties, releases, community." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0b0b0b;
+      --fg: #f6f6f6;
+      --muted: #9a9a9a;
+      --accent: #d3ff3a; /* neon limelight */
+      --card: #121212;
+      --border: #222;
+    }
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      color: var(--fg);
+      background: var(--bg);
+      line-height: 1.35;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    a { color: inherit; text-decoration: none; }
+    .container { width: min(1100px, 92vw); margin: 0 auto; }
+    /* Header */
+    header {
+      position: sticky; top: 0; z-index: 50; backdrop-filter: saturate(140%) blur(8px);
+      background: rgba(11,11,11,0.6);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: .9rem 0; }
+    .brand { font-family: "Space Grotesk", Inter, sans-serif; font-weight: 700; letter-spacing: .06em; text-transform: lowercase; }
+    .brand a { display: inline-flex; align-items: baseline; gap: .4rem; }
+    .brand .dot { width: .6rem; height: .6rem; background: var(--accent); display: inline-block; border-radius: 50%; box-shadow: 0 0 16px var(--accent); }
+    .menu { display: flex; gap: 1.2rem; align-items: center; }
+    .menu a { color: var(--muted); font-weight: 500; font-size: .95rem; text-transform: uppercase; letter-spacing: .12em; }
+    .menu a:hover, .menu a.active { color: var(--fg); }
+    .socials { display: flex; gap: .9rem; }
+    .badge { border: 1px solid var(--border); border-radius: 999px; padding: .4rem .7rem; color: var(--fg); font-weight: 600; font-size: .8rem; background: #121212; }
+    /* Mobile */
+    .hamb { display: none; }
+    @media (max-width: 860px) {
+      .menu { display: none; }
+      .hamb { display: inline-flex; flex-direction: column; gap: 4px; }
+      .hamb span { width: 24px; height: 2px; background: var(--fg); }
+      .drawer { position: fixed; inset: 0 0 auto auto; top: 60px; right: 4vw; width: min(92vw, 360px); background: #0f0f0f; border: 1px solid var(--border); border-radius: 14px; padding: 1rem; display: none; }
+      .drawer a { display: block; padding: .8rem; border-radius: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: .12em; }
+      .drawer a:hover { background: #151515; color: var(--fg); }
+      .drawer.open { display: block; }
+    }
+    /* Hero */
+    .hero { padding: 12vh 0 10vh; border-bottom: 1px solid var(--border); background: radial-gradient(1200px 600px at 80% -10%, rgba(211,255,58,0.08), transparent 60%); }
+    .hero h1 { font-family: "Space Grotesk"; font-size: clamp(2.6rem, 7vw, 6rem); line-height: 0.92; margin: 0 0 1rem; text-transform: uppercase; letter-spacing: .04em; }
+    .hero p { color: var(--muted); font-size: clamp(1rem, 2.4vw, 1.2rem); max-width: 62ch; }
+    .cta { margin-top: 1.2rem; display: flex; gap: .8rem; flex-wrap: wrap; }
+    .btn { display: inline-flex; align-items: center; gap: .6rem; padding: .8rem 1rem; border-radius: 12px; border: 1px solid var(--border); background: #141414; font-weight: 600; }
+    .btn.primary { background: var(--accent); color: #0b0b0b; border-color: transparent; box-shadow: 0 8px 26px rgba(211,255,58,.25); }
+    .btn:hover { transform: translateY(-1px); }
+    /* Sections */
+    section { padding: 8vh 0; }
+    .section-head { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; margin-bottom: 2rem; }
+    .section-head h2 { font-family: "Space Grotesk"; text-transform: uppercase; letter-spacing: .12em; font-size: 1rem; color: var(--muted); }
+    .section-head a { color: var(--fg); text-decoration: underline; }
+    /* Grid cards */
+    .grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 16px; }
+    .card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; }
+    .cover { aspect-ratio: 16/9; background: #0b0b0b; display: grid; place-items: center; color: var(--muted); font-weight: 600; letter-spacing: .12em; text-transform: uppercase; }
+    .card-body { padding: 1rem; display: grid; gap: .4rem; }
+    .eyebrow { color: var(--muted); text-transform: uppercase; letter-spacing: .12em; font-size: .8rem; }
+    .title { font-size: 1.1rem; font-weight: 700; }
+    .meta { color: var(--muted); font-size: .9rem; }
+    .pill { border: 1px solid var(--border); border-radius: 999px; padding: .2rem .6rem; font-size: .75rem; color: var(--muted); }
+    /* Events Grid */
+    .events .grid > * { grid-column: span 6; }
+    @media (max-width: 860px){ .events .grid > * { grid-column: 1 / -1; } }
+    /* Releases Grid */
+    .releases .grid > * { grid-column: span 4; }
+    @media (max-width: 860px){ .releases .grid > * { grid-column: span 6; } }
+    @media (max-width: 560px){ .releases .grid > * { grid-column: 1 / -1; } }
+    /* Odyssey/Projects strip */
+    .strip { display: grid; grid-template-columns: repeat(12, 1fr); gap: 16px; }
+    .strip .tile { grid-column: span 4; border: 1px solid var(--border); background: linear-gradient(180deg,#141414, #0f0f0f); padding: 1.2rem; border-radius: 16px; }
+    .strip .tile h3 { margin: 0 0 .3rem; font-size: 1.1rem; }
+    .strip .tile p { margin: 0; color: var(--muted); font-size: .95rem; }
+    @media (max-width: 860px){ .strip .tile { grid-column: 1 / -1; } }
+    /* Newsletter */
+    .newsletter { border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 6vh 0; }
+    .newsletter form { display: grid; grid-template-columns: 1fr auto; gap: 10px; max-width: 560px; }
+    .newsletter input { background: #121212; border: 1px solid var(--border); border-radius: 12px; padding: .9rem 1rem; color: var(--fg); }
+    .newsletter button { border-radius: 12px; border: 1px solid var(--border); background: var(--accent); color: #0b0b0b; font-weight: 700; padding: .9rem 1rem; }
+    /* Footer */
+    footer { padding: 6vh 0 8vh; color: var(--muted); }
+    footer .columns { display: grid; grid-template-columns: repeat(12, 1fr); gap: 16px; }
+    footer .columns > div { grid-column: span 4; }
+    @media (max-width: 860px){ footer .columns > div { grid-column: 1 / -1; } }
+    .tiny { font-size: .85rem; color: var(--muted); }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <div class="brand">
+        <a href="#top" aria-label="aggregat home"><span class="dot"></span><span>aggregat</span></a>
+      </div>
+      <nav class="menu" aria-label="primary">
+        <a href="#events" class="active">events</a>
+        <a href="#releases">releases</a>
+        <a href="#projects">projects</a>
+        <a href="#contact">contact</a>
+      </nav>
+      <div class="socials">
+        <a class="badge" href="https://instagram.com/aggregat040" target="_blank" rel="noopener">IG</a>
+        <a class="badge" href="#" target="_blank" rel="noopener">SC</a>
+        <a class="badge" href="#" target="_blank" rel="noopener">BC</a>
+      </div>
+      <button class="hamb" aria-label="Open menu" aria-controls="drawer" aria-expanded="false" onclick="toggleDrawer()">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div id="drawer" class="drawer" role="dialog" aria-modal="true" aria-label="Site menu">
+      <a href="#events" onclick="toggleDrawer(false)">events</a>
+      <a href="#releases" onclick="toggleDrawer(false)">releases</a>
+      <a href="#projects" onclick="toggleDrawer(false)">projects</a>
+      <a href="#contact" onclick="toggleDrawer(false)">contact</a>
+      <div style="height:8px"></div>
+      <a href="https://instagram.com/aggregat040" target="_blank" rel="noopener">instagram</a>
+      <a href="#" target="_blank" rel="noopener">soundcloud</a>
+      <a href="#" target="_blank" rel="noopener">bandcamp</a>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero container">
+      <h1>aggregat<br/> underground culture</h1>
+      <p>Parties, releases and design from Malmö — curated by <strong>BXY Santiago</strong> & friends. We build spaces for sound, sweat and solidarity.</p>
+      <div class="cta">
+        <a class="btn primary" href="#events">See upcoming events</a>
+        <a class="btn" href="#newsletter">Join the mailing list</a>
+      </div>
+    </section>
+
+    <section id="events" class="events container">
+      <div class="section-head">
+        <h2>Events</h2>
+        <a href="#">All events →</a>
+      </div>
+      <div class="grid">
+        <!-- Event card 1 -->
+        <article class="card">
+          <div class="cover">Event Artwork</div>
+          <div class="card-body">
+            <div class="eyebrow">Sat, 07 Dec 2025 · Malmö</div>
+            <div class="title">EP Release: "Hyper Structure"</div>
+            <div class="meta">w/ Danni, local guests · 23:00–05:00</div>
+            <div class="meta"><span class="pill">Techno</span> <span class="pill">DNB</span> <span class="pill">Rave</span></div>
+            <div class="cta"><a class="btn" href="#">Tickets</a><a class="btn" href="#">Facebook</a></div>
+          </div>
+        </article>
+        <!-- Event card 2 -->
+        <article class="card">
+          <div class="cover">Event Artwork</div>
+          <div class="card-body">
+            <div class="eyebrow">Fri, 17 Jan 2026 · Copenhagen</div>
+            <div class="title">Aggregat × Friends</div>
+            <div class="meta">venue tba · 23:00–06:00</div>
+            <div class="meta"><span class="pill">Collab</span> <span class="pill">Hardgroove</span></div>
+            <div class="cta"><a class="btn" href="#">Info</a></div>
+          </div>
+        </article>
+        <!-- Event card 3 -->
+        <article class="card">
+          <div class="cover">Event Artwork</div>
+          <div class="card-body">
+            <div class="eyebrow">Past · 21 Sep 2025 · Malmö</div>
+            <div class="title">Warehouse 040</div>
+            <div class="meta">photos + recap</div>
+            <div class="cta"><a class="btn" href="#">Gallery</a></div>
+          </div>
+        </article>
+        <!-- Event card 4 -->
+        <article class="card">
+          <div class="cover">Event Artwork</div>
+          <div class="card-body">
+            <div class="eyebrow">Past · 15 Aug 2025 · Malmö</div>
+            <div class="title">Summer Assembly</div>
+            <div class="meta">after movie · tracklist</div>
+            <div class="cta"><a class="btn" href="#">Watch</a></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="releases" class="releases container">
+      <div class="section-head">
+        <h2>Releases</h2>
+        <a href="#">All releases →</a>
+      </div>
+      <div class="grid">
+        <!-- Release 1 -->
+        <article class="card">
+          <div class="cover">Cover Art</div>
+          <div class="card-body">
+            <div class="eyebrow">AGG-007 · EP</div>
+            <div class="title">Hyper Structure</div>
+            <div class="meta">Out Dec 2025 · Spotify · Bandcamp</div>
+            <div class="cta"><a class="btn" href="#">Listen</a><a class="btn" href="#">Buy</a></div>
+          </div>
+        </article>
+        <!-- Release 2 -->
+        <article class="card">
+          <div class="cover">Cover Art</div>
+          <div class="card-body">
+            <div class="eyebrow">Single</div>
+            <div class="title">[Your Single Title]</div>
+            <div class="meta">Stream everywhere</div>
+            <div class="cta"><a class="btn" href="#">Spotify</a></div>
+          </div>
+        </article>
+        <!-- Release 3 -->
+        <article class="card">
+          <div class="cover">Cover Art</div>
+          <div class="card-body">
+            <div class="eyebrow">Comp</div>
+            <div class="title">Aggregated</div>
+            <div class="meta">feat. local artists</div>
+            <div class="cta"><a class="btn" href="#">SoundCloud</a></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="projects" class="container">
+      <div class="section-head">
+        <h2>Projects</h2>
+        <a href="#">More →</a>
+      </div>
+      <div class="strip">
+        <div class="tile">
+          <h3>TRSN</h3>
+          <p>Editorial and zines about club culture, design and politics.</p>
+        </div>
+        <div class="tile">
+          <h3>TNT</h3>
+          <p>Mix series and live sets recorded at our events.</p>
+        </div>
+        <div class="tile">
+          <h3>Odyssey</h3>
+          <p>Traveling club concepts and collaborations across the Nordics.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="newsletter" class="newsletter">
+      <div class="container">
+        <div class="section-head">
+          <h2>Mailing list</h2>
+          <span class="tiny">No spam. Unsubscribe anytime.</span>
+        </div>
+        <!-- Replace action with your Mailchimp or Buttondown form URL -->
+        <form action="#" method="post" onsubmit="fakeSubmit(event)">
+          <input type="email" name="email" placeholder="your@email" required />
+          <button type="submit">Join</button>
+        </form>
+        <p id="thanks" class="tiny" style="display:none; margin-top:10px;">Thanks — check your inbox for a confirmation.</p>
+      </div>
+    </section>
+
+    <section id="contact" class="container">
+      <div class="section-head"><h2>Contact</h2></div>
+      <div class="grid">
+        <div class="card" style="grid-column: span 6;">
+          <div class="card-body">
+            <div class="title">Bookings & press</div>
+            <div class="meta"><a href="mailto:booking@aggregat040.com">booking@aggregat040.com</a></div>
+          </div>
+        </div>
+        <div class="card" style="grid-column: span 6;">
+          <div class="card-body">
+            <div class="title">General</div>
+            <div class="meta"><a href="mailto:hello@aggregat040.com">hello@aggregat040.com</a></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container columns">
+      <div>
+        <div class="brand" style="margin-bottom:.6rem;"><span class="dot"></span> aggregat</div>
+        <div class="tiny">Malmö, Sweden — since 040</div>
+      </div>
+      <div>
+        <div class="tiny">Follow</div>
+        <div style="margin-top:.5rem; display:flex; gap:.8rem; flex-wrap:wrap;">
+          <a class="badge" href="https://instagram.com/aggregat040" target="_blank" rel="noopener">Instagram</a>
+          <a class="badge" href="#" target="_blank" rel="noopener">SoundCloud</a>
+          <a class="badge" href="#" target="_blank" rel="noopener">Bandcamp</a>
+          <a class="badge" href="#" target="_blank" rel="noopener">Spotify</a>
+        </div>
+      </div>
+      <div>
+        <div class="tiny">© <span id="year"></span> aggregat040</div>
+        <div class="tiny">site by aggregat</div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const yearEl = document.getElementById('year');
+    yearEl.textContent = new Date().getFullYear();
+    function toggleDrawer(force){
+      const drawer = document.getElementById('drawer');
+      const isOpen = force !== undefined ? force : !drawer.classList.contains('open');
+      drawer.classList.toggle('open', isOpen);
+      document.querySelector('.hamb').setAttribute('aria-expanded', isOpen);
+    }
+    function fakeSubmit(e){ e.preventDefault(); document.getElementById('thanks').style.display = 'block'; }
+  </script>
+</body>
+</html>

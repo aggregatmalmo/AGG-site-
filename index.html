@@ -5,6 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>aggregat — underground culture</title>
   <meta name="description" content="aggregat040 — parties, releases, community." />
+  <!-- Favicons (upload to /assets) -->
+  <link rel="icon" href="assets/favicon.ico" />
+  <!-- Social cards -->
+  <meta property="og:title" content="aggregat — underground culture" />
+  <meta property="og:description" content="Parties, releases and design from Malmö." />
+  <meta property="og:image" content="assets/og-cover.jpg" />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
@@ -102,6 +110,8 @@
     footer .columns > div { grid-column: span 4; }
     @media (max-width: 860px){ footer .columns > div { grid-column: 1 / -1; } }
     .tiny { font-size: .85rem; color: var(--muted); }
+      /* Cover images */
+    .cover-img { width: 100%; aspect-ratio: 16/9; object-fit: cover; display: block; background: #0b0b0b; }
   </style>
 </head>
 <body>
@@ -155,7 +165,7 @@
       <div class="grid">
         <!-- Event card 1 -->
         <article class="card">
-          <div class="cover">Event Artwork</div>
+          <img class="cover-img" src="assets/event-ep-release.jpg" alt="Aggregat EP Release flyer" loading="lazy" />
           <div class="card-body">
             <div class="eyebrow">Sat, 07 Dec 2025 · Malmö</div>
             <div class="title">EP Release: "Hyper Structure"</div>
@@ -166,7 +176,7 @@
         </article>
         <!-- Event card 2 -->
         <article class="card">
-          <div class="cover">Event Artwork</div>
+          <img class="cover-img" src="assets/event-friends.jpg" alt="Aggregat × Friends flyer" loading="lazy" />
           <div class="card-body">
             <div class="eyebrow">Fri, 17 Jan 2026 · Copenhagen</div>
             <div class="title">Aggregat × Friends</div>
@@ -177,7 +187,7 @@
         </article>
         <!-- Event card 3 -->
         <article class="card">
-          <div class="cover">Event Artwork</div>
+          <img class="cover-img" src="assets/event-warehouse.jpg" alt="Warehouse 040 poster" loading="lazy" />
           <div class="card-body">
             <div class="eyebrow">Past · 21 Sep 2025 · Malmö</div>
             <div class="title">Warehouse 040</div>
@@ -187,7 +197,7 @@
         </article>
         <!-- Event card 4 -->
         <article class="card">
-          <div class="cover">Event Artwork</div>
+          <img class="cover-img" src="assets/event-summer.jpg" alt="Summer Assembly poster" loading="lazy" />
           <div class="card-body">
             <div class="eyebrow">Past · 15 Aug 2025 · Malmö</div>
             <div class="title">Summer Assembly</div>
@@ -206,7 +216,7 @@
       <div class="grid">
         <!-- Release 1 -->
         <article class="card">
-          <div class="cover">Cover Art</div>
+          <img class="cover-img" src="assets/release-hyper-structure.jpg" alt="Hyper Structure cover art" loading="lazy" />
           <div class="card-body">
             <div class="eyebrow">AGG-007 · EP</div>
             <div class="title">Hyper Structure</div>
@@ -216,7 +226,7 @@
         </article>
         <!-- Release 2 -->
         <article class="card">
-          <div class="cover">Cover Art</div>
+          <img class="cover-img" src="assets/release-single.jpg" alt="Single cover art" loading="lazy" />
           <div class="card-body">
             <div class="eyebrow">Single</div>
             <div class="title">[Your Single Title]</div>
@@ -226,7 +236,7 @@
         </article>
         <!-- Release 3 -->
         <article class="card">
-          <div class="cover">Cover Art</div>
+          <img class="cover-img" src="assets/release-aggregated.jpg" alt="Compilation cover art" loading="lazy" />
           <div class="card-body">
             <div class="eyebrow">Comp</div>
             <div class="title">Aggregated</div>

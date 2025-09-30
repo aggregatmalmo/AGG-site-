@@ -4,16 +4,15 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Releases — AGGREGAT</title>
-
   <style>
     :root{
       --ink:#111;
       --muted:#555;
-      --page:#f6f6f6;      /* same light vibe as About */
+      --page:#f6f6f6;
       --line:#e2e2e2;
-      --pill:#ffffff;      /* nav pill background */
+      --pill:#ffffff;
       --pill-border:#cccccc;
-      --pill-active:#000000; /* active pill is black like your other pages */
+      --pill-active:#000000;
     }
     *{box-sizing:border-box}
     body{
@@ -21,7 +20,7 @@
       font-family:Arial,Helvetica,sans-serif; line-height:1.5;
     }
 
-    /* HEADER (matches your other pages) */
+    /* Header (matches your other pages) */
     header{
       position:fixed; top:0; left:0; right:0; z-index:40;
       padding:.8rem 0; border-bottom:1px solid #ddd;
@@ -42,47 +41,50 @@
     main{padding-top:90px}
     h1{font-size:1.6rem; text-transform:uppercase; letter-spacing:.08em; margin:1.2rem 0 1.2rem}
 
-    /* SLIDER ROW */
-    .slider-wrap{position:relative}
+    /* Slider row */
+    .slider-wrap{position:relative; margin-bottom:18px}
     .rail{
       display:flex; gap:24px; overflow-x:auto; scroll-snap-type:x mandatory;
-      padding:8px 6px 14px; scrollbar-width:none; /* FF */
+      padding:8px 6px 14px; scrollbar-width:none;
     }
-    .rail::-webkit-scrollbar{display:none} /* Chrome/Safari */
+    .rail::-webkit-scrollbar{display:none}
     .tile{
-      flex:0 0 320px; scroll-snap-align:start; background:#fff;
+      flex:0 0 340px; scroll-snap-align:start; background:#fff;
       border:1px solid var(--line); border-radius:14px; padding:18px;
-      box-shadow:0 8px 20px rgba(0,0,0,.08);
+      /* stronger, softer drop shadow under the CARD itself */
+      box-shadow:0 16px 42px rgba(0,0,0,.12), 0 8px 18px rgba(0,0,0,.08);
     }
 
-    /* Vinyl sleeve (square, with spine + soft inner) */
+    /* Vinyl sleeve (square with spine + inner bevel) */
     .sleeve{
       position:relative; background:#fff; overflow:hidden; border-radius:0;
-      box-shadow:0 14px 28px rgba(0,0,0,.18), 0 40px 80px rgba(0,0,0,.15);
+      /* HEAVIER sleeve shadow for “on-table” feel */
+      box-shadow:0 24px 60px rgba(0,0,0,.28), 0 10px 24px rgba(0,0,0,.18);
       transition:transform .25s ease, box-shadow .25s ease, filter .25s ease;
     }
     .sleeve img{display:block; width:100%; aspect-ratio:1/1; object-fit:cover}
     .sleeve::before{
       content:""; position:absolute; inset:0;
       box-shadow:
-        inset 0 0 0 1px rgba(0,0,0,.05),
-        inset 0 40px 80px rgba(0,0,0,.10),
-        inset 0 -30px 60px rgba(0,0,0,.06);
+        inset 0 0 0 1px rgba(0,0,0,.06),
+        inset 0 40px 80px rgba(0,0,0,.12),
+        inset 0 -30px 60px rgba(0,0,0,.08);
       pointer-events:none;
     }
     .sleeve::after{
       content:""; position:absolute; left:0; top:0; bottom:0; width:14px;
-      background:linear-gradient(90deg, rgba(0,0,0,.18), rgba(0,0,0,0)); opacity:.35;
+      background:linear-gradient(90deg, rgba(0,0,0,.20), rgba(0,0,0,0)); opacity:.38;
     }
     .tile:hover .sleeve{
-      transform:translateY(-8px); filter:saturate(1.04);
-      box-shadow:0 18px 36px rgba(0,0,0,.22), 0 70px 120px rgba(0,0,0,.20);
+      transform:translateY(-10px);
+      box-shadow:0 28px 80px rgba(0,0,0,.34), 0 14px 34px rgba(0,0,0,.22);
+      filter:saturate(1.05);
     }
 
     .sticker{
       position:absolute; top:.6rem; right:.6rem; background:#fff;
-      padding:.2rem .55rem; font-size:.74rem; font-weight:700;
-      border-radius:999px; box-shadow:0 2px 6px rgba(0,0,0,.15);
+      padding:.22rem .6rem; font-size:.74rem; font-weight:700;
+      border-radius:999px; box-shadow:0 2px 6px rgba(0,0,0,.15)
     }
     .info{margin-top:12px}
     .cat{font-size:.8rem; font-weight:800; margin-bottom:.25rem}
@@ -94,9 +96,9 @@
       font-size:.8rem; font-weight:700;
     }
 
-    /* Arrow buttons */
+    /* Arrows */
     .arrow{
-      position:absolute; top:50%; transform:translateY(-50%);
+      position:absolute; top:50%; transform:translateY(-50%); z-index:5;  /* <-- stays above content */
       width:42px; height:42px; border-radius:999px;
       border:1px solid var(--pill-border); background:#fff; color:#000;
       display:grid; place-items:center; cursor:pointer; user-select:none;
@@ -107,7 +109,7 @@
     .arrow.right{right:-4px}
 
     @media (max-width:760px){
-      .tile{flex-basis:260px}
+      .tile{flex-basis:280px}
       .arrow{display:none} /* swipe on mobile */
     }
   </style>
@@ -118,8 +120,8 @@
       <div class="brand"><span class="dot"></span>AGGREGAT</div>
       <nav class="links">
         <a href="index.html">Home</a>
-        <a href="about.html">About</a>
         <a href="releases.html" class="active">Releases</a>
+        <a href="about.html">About</a>
         <a href="https://instagram.com/aggregat040" target="_blank" rel="noopener">IG</a>
         <a href="#" target="_blank" rel="noopener">SC</a>
         <a href="#" target="_blank" rel="noopener">FB</a>
@@ -133,7 +135,7 @@
     <div class="slider-wrap">
       <button class="arrow left" aria-label="Prev" id="prevBtn">‹</button>
       <div class="rail" id="rail">
-        <!-- ORDER: move these blocks up/down to change order -->
+        <!-- Adjust order by reordering these tiles -->
         <!-- AGG001 -->
         <article class="tile">
           <div class="sleeve">
@@ -148,7 +150,7 @@
           </div>
         </article>
 
-        <!-- AGG002 — Raddler Express -->
+        <!-- AGG002 -->
         <article class="tile">
           <div class="sleeve">
             <img src="assets/raddler-express.jpg" alt="AGG002 cover">
@@ -162,7 +164,7 @@
           </div>
         </article>
 
-        <!-- AGG003 — Speed Bump Vol. 2 -->
+        <!-- AGG003 -->
         <article class="tile">
           <div class="sleeve">
             <img src="assets/speedbump-vol2.jpg" alt="AGG003 cover">
@@ -195,14 +197,35 @@
   </main>
 
   <script>
-    // simple arrow controls for horizontal slider
+    // simple looping slider
     const rail = document.getElementById('rail');
     const prev = document.getElementById('prevBtn');
     const next = document.getElementById('nextBtn');
-    const step = 360; // pixels to scroll per click
 
-    prev.addEventListener('click', () => rail.scrollBy({left: -step, behavior: 'smooth'}));
-    next.addEventListener('click', () => rail.scrollBy({left:  step, behavior: 'smooth'}));
+    // one tile width + gap (px) — matches .tile flex-basis (340) + gap (24)
+    const STEP = 364;
+
+    function goNext(){
+      const maxScroll = rail.scrollWidth - rail.clientWidth;
+      if (Math.ceil(rail.scrollLeft) >= maxScroll - 5){
+        // loop to start
+        rail.scrollTo({left: 0, behavior: 'smooth'});
+      } else {
+        rail.scrollBy({left: STEP, behavior: 'smooth'});
+      }
+    }
+    function goPrev(){
+      if (rail.scrollLeft <= 5){
+        // loop to end
+        rail.scrollTo({left: rail.scrollWidth, behavior: 'instant'});
+        // small async to then scroll one step back smoothly
+        requestAnimationFrame(()=> rail.scrollBy({left: -STEP, behavior: 'smooth'}));
+      } else {
+        rail.scrollBy({left: -STEP, behavior: 'smooth'});
+      }
+    }
+    next.addEventListener('click', goNext);
+    prev.addEventListener('click', goPrev);
   </script>
 </body>
 </html>

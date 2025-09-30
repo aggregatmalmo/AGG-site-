@@ -5,147 +5,99 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Releases — AGGREGAT</title>
   <style>
-    :root {
-      --ink: #111;
-      --muted: #555;
-      --page: #f6f6f6;
-      --accent: #000;
+    :root{
+      --ink:#111;
+      --muted:#555;
+      --page:#f6f6f6;
+
+      /* Carousel tuning */
+      --gap: 6vw;                               /* space between slides */
+      --slideW: clamp(260px, 52vw, 700px);      /* center cover width (fits w/ text) */
+      --sideScale: .84;                         /* side peek scale */
+      --sideOpacity: .74;                       /* side peek opacity */
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--page);color:var(--ink);font-family:Arial,Helvetica,sans-serif;line-height:1.5}
+
+    /* Header (square-ish tabs) */
+    header{
+      position:sticky; top:0; z-index:50;
+      background:#fff; border-bottom:1px solid #ddd;
+      padding:14px 22px;
+      display:flex; align-items:center; justify-content:space-between;
+    }
+    .logo{font-weight:700; letter-spacing:.12em}
+    nav{display:flex; gap:8px}
+    nav a{
+      text-decoration:none; color:#000; font-weight:600; font-size:.9rem;
+      padding:6px 14px; border:1px solid #000; border-radius:6px; /* square */
+    }
+    nav a.active, nav a:hover{background:#000; color:#fff}
+
+    main{padding-top:10px}
+    h1{margin:22px 0 6px; text-align:center; font-size:2rem}
+
+    /* Carousel layout */
+    .carousel{position:relative; max-width:100vw; margin:6px auto 60px; overflow:hidden}
+    .viewport{position:relative; width:100%}
+    .track{
+      display:flex; align-items:center; gap:var(--gap);
+      will-change:transform; transform:translate3d(0,0,0); transition:transform .5s ease;
+      padding:0 calc(var(--gap)/2);
+    }
+    .slide{
+      width:var(--slideW); flex:0 0 var(--slideW);
+      display:flex; flex-direction:column; align-items:center;
+      transition:transform .5s ease, opacity .5s ease, filter .5s ease;
     }
 
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: var(--page);
-      color: var(--ink);
+    /* Sleeve */
+    .sleeve{
+      width:100%; background:#fff; overflow:hidden; border-radius:0;
+      box-shadow:0 22px 66px rgba(0,0,0,.20), 0 10px 28px rgba(0,0,0,.16);
+    }
+    .sleeve img{display:block; width:100%; height:auto}
+
+    /* Center vs side */
+    .slide:not(.active){ transform:scale(var(--sideScale)); opacity:var(--sideOpacity); }
+    .meta{display:none; margin-top:12px; text-align:center}
+    .slide.active .meta{display:block}
+    .cat{font-weight:700; font-size:.92rem}
+    .artist{font-weight:800; font-size:1.12rem; margin-top:2px}
+    .title{color:var(--muted); margin-top:2px}
+    .btn{
+      display:inline-block; margin-top:.6rem; padding:.48rem 1.05rem; border-radius:6px;
+      background:#000; color:#fff; text-decoration:none; font-weight:700; font-size:.9rem
     }
 
-    /* NAV */
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 15px 30px;
-      background: white;
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      border-bottom: 1px solid #ddd;
+    /* Arrows — tall, semi-transparent rectangles with BIG chevrons */
+    .arrow{
+      position:absolute; top:50%; transform:translateY(-50%);
+      width:44px; height:124px; border-radius:6px;
+      background:rgba(0,0,0,.34); color:#fff; border:none;
+      display:grid; place-items:center; cursor:pointer; user-select:none;
+      box-shadow:0 10px 30px rgba(0,0,0,.18);
+      opacity:.85; transition:opacity .2s, background .2s;
+      z-index:5; font-size:2.3rem; font-weight:900; line-height:0;
     }
+    .arrow:hover{background:rgba(0,0,0,.55); opacity:1}
+    .arrow.left{left:14px}
+    .arrow.right{right:14px}
 
-    header .logo {
-      font-weight: bold;
-      font-size: 1.2rem;
-      letter-spacing: 1px;
+    /* Mobile tweaks */
+    @media (max-width:820px){
+      :root{
+        --gap: 7vw;
+        --slideW: 84vw;   /* keep cover+text in view */
+        --sideScale: .9;
+        --sideOpacity: .86;
+      }
+      .arrow{height:104px}
     }
-
-    nav a {
-      text-decoration: none;
-      color: var(--ink);
-      margin-left: 10px;
-      padding: 6px 14px;
-      border: 1px solid var(--ink);
-      border-radius: 4px;
-      transition: all 0.2s;
-      font-size: 0.9rem;
+    @media (max-width:640px){
+      .arrow{display:none} /* swipe on mobile */
+      nav a{padding:5px 10px}
     }
-    nav a.active {
-      background: var(--ink);
-      color: white;
-    }
-    nav a:hover {
-      background: var(--ink);
-      color: white;
-    }
-
-    /* SECTION TITLE */
-    h1 {
-      text-align: center;
-      font-size: 2rem;
-      margin: 30px 0;
-    }
-
-    /* CAROUSEL */
-    .carousel {
-      position: relative;
-      overflow: hidden;
-      width: 100%;
-      max-width: 1200px;
-      margin: auto;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .carousel-track {
-      display: flex;
-      transition: transform 0.6s ease;
-    }
-
-    .release {
-      flex: 0 0 60%;
-      margin: 0 20px;
-      text-align: center;
-      opacity: 0.4;
-      transform: scale(0.75);
-      transition: all 0.5s ease;
-    }
-
-    .release.active {
-      flex: 0 0 70%;
-      opacity: 1;
-      transform: scale(1);
-      z-index: 2;
-    }
-
-    .release img {
-      width: 100%;
-      height: auto;
-      display: block;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-    }
-
-    .release h2 {
-      margin: 15px 0 5px;
-      font-size: 1.1rem;
-    }
-
-    .release p {
-      margin: 2px 0;
-      color: var(--muted);
-    }
-
-    .release a {
-      display: inline-block;
-      margin-top: 8px;
-      padding: 6px 14px;
-      background: var(--ink);
-      color: white;
-      text-decoration: none;
-      border-radius: 4px;
-      font-size: 0.85rem;
-    }
-
-    /* ARROWS */
-    .carousel-btn {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background: rgba(0,0,0,0.4);
-      border: none;
-      padding: 15px 12px;
-      cursor: pointer;
-      font-size: 2.5rem; /* BIGGER chevrons */
-      font-weight: bold;
-      color: white;
-      border-radius: 4px; /* squarer */
-      transition: background 0.2s;
-    }
-    .carousel-btn:hover {
-      background: rgba(0,0,0,0.7);
-    }
-    .carousel-btn.prev { left: 20px; }
-    .carousel-btn.next { right: 20px; }
-
   </style>
 </head>
 <body>
@@ -158,70 +110,157 @@
     </nav>
   </header>
 
-  <h1>Releases</h1>
+  <main>
+    <h1>Releases</h1>
 
-  <div class="carousel">
-    <button class="carousel-btn prev">&#10094;</button>
-    <div class="carousel-track">
-      <div class="release">
-        <img src="assets/raft001.jpg" alt="AGG001">
-        <h2>AGG001 — Various Artists</h2>
-        <p>RAFT001 Compilation</p>
-        <a href="#">Bandcamp</a>
+    <section class="carousel" id="carousel">
+      <button class="arrow left" id="prevBtn" aria-label="Previous">‹</button>
+
+      <div class="viewport" id="viewport">
+        <div class="track" id="track">
+          <!-- ORIGINALS (order these how you want) -->
+          <article class="slide">
+            <div class="sleeve"><img src="assets/raft001.jpg" alt="AGG001 cover"></div>
+            <div class="meta">
+              <div class="cat">AGG001</div>
+              <div class="artist">Various Artists</div>
+              <div class="title">RAFT001 Compilation</div>
+              <a class="btn" href="#">Bandcamp</a>
+            </div>
+          </article>
+
+          <article class="slide">
+            <div class="sleeve"><img src="assets/raddler-express.jpg" alt="AGG002 cover"></div>
+            <div class="meta">
+              <div class="cat">AGG002</div>
+              <div class="artist">Raddler Express</div>
+              <div class="title">Express EP</div>
+              <a class="btn" href="#">Bandcamp</a>
+            </div>
+          </article>
+
+          <article class="slide">
+            <div class="sleeve"><img src="assets/speedbump-vol2.jpg" alt="AGG003 cover"></div>
+            <div class="meta">
+              <div class="cat">AGG003</div>
+              <div class="artist">Various Artists</div>
+              <div class="title">Speed Bump Vol. 2</div>
+              <a class="btn" href="#">Bandcamp</a>
+            </div>
+          </article>
+
+          <article class="slide">
+            <div class="sleeve"><img src="assets/t001.jpg" alt="AGG004 cover"></div>
+            <div class="meta">
+              <div class="cat">AGG004</div>
+              <div class="artist">Various Artists</div>
+              <div class="title">[T001]</div>
+              <a class="btn" href="#">Bandcamp</a>
+            </div>
+          </article>
+        </div>
       </div>
-      <div class="release">
-        <img src="assets/raddler.jpg" alt="AGG002">
-        <h2>AGG002 — Raddler Express</h2>
-        <p>Express EP</p>
-        <a href="#">Bandcamp</a>
-      </div>
-      <div class="release">
-        <img src="assets/speedbump.jpg" alt="AGG003">
-        <h2>AGG003 — Various Artists</h2>
-        <p>Speed Bump Vol. 2</p>
-        <a href="#">Bandcamp</a>
-      </div>
-      <div class="release">
-        <img src="assets/t001.jpg" alt="AGG004">
-        <h2>AGG004 — Various Artists</h2>
-        <p>[T001]</p>
-        <a href="#">Bandcamp</a>
-      </div>
-    </div>
-    <button class="carousel-btn next">&#10095;</button>
-  </div>
+
+      <button class="arrow right" id="nextBtn" aria-label="Next">›</button>
+    </section>
+  </main>
 
   <script>
-    const track = document.querySelector('.carousel-track');
-    const releases = Array.from(track.children);
-    const prevButton = document.querySelector('.carousel-btn.prev');
-    const nextButton = document.querySelector('.carousel-btn.next');
-    let currentIndex = 0;
+    // Infinite, centered carousel with peeking sides. Only active shows meta.
+    const viewport = document.getElementById('viewport');
+    const track = document.getElementById('track');
+    const prev = document.getElementById('prevBtn');
+    const next = document.getElementById('nextBtn');
 
-    function updateCarousel() {
-      releases.forEach((release, index) => {
-        release.classList.remove('active');
+    // 1) Clone head/tail once for seamless peeks
+    const originals = Array.from(track.children);
+    const COUNT = originals.length;
+
+    function clone(where){
+      const clones = originals.map(el => {
+        const c = el.cloneNode(true);
+        c.classList.add('is-clone');
+        return c;
       });
-      releases[currentIndex].classList.add('active');
+      if(where==='before') clones.reverse().forEach(c=>track.insertBefore(c, track.firstChild));
+      else clones.forEach(c=>track.appendChild(c));
+    }
+    clone('before');
+    clone('after');
 
-      const offset = -currentIndex * (100 / releases.length);
-      track.style.transform = `translateX(${offset}%)`;
+    let slides = Array.from(track.children);
+    let current = COUNT; // start at first original (after the leading clones)
+
+    function gapPx(){
+      const g = getComputedStyle(track).gap || '0px';
+      return parseFloat(g);
+    }
+    function centerOffset(i){
+      const item = slides[i];
+      const left = item.offsetLeft;            // from track
+      const w = item.offsetWidth;
+      const center = left + w/2;
+      return viewport.clientWidth/2 - center;  // translateX value
+    }
+    function apply(immediate=false){
+      const x = centerOffset(current);
+      track.style.transition = immediate ? 'none' : 'transform .5s ease';
+      track.style.transform = `translate3d(${x}px,0,0)`;
+      slides.forEach((s, idx)=> s.classList.toggle('active', idx===current));
+      if(immediate) requestAnimationFrame(()=>track.style.transition='transform .5s ease');
+    }
+    // mark initial active state
+    slides[current].classList.add('active');
+
+    function normalize(){
+      if(current >= COUNT*2){ // stepped into trailing clones
+        current -= COUNT;
+        apply(true);
+      }else if(current < COUNT){ // stepped into leading clones
+        current += COUNT;
+        apply(true);
+      }
+    }
+    function go(dir){
+      current += dir;
+      apply(false);
+      clearTimeout(go._t); go._t = setTimeout(normalize, 520);
     }
 
-    function showNext() {
-      currentIndex = (currentIndex + 1) % releases.length;
-      updateCarousel();
-    }
+    next.addEventListener('click', ()=>go(1));
+    prev.addEventListener('click', ()=>go(-1));
 
-    function showPrev() {
-      currentIndex = (currentIndex - 1 + releases.length) % releases.length;
-      updateCarousel();
-    }
+    // keyboard
+    window.addEventListener('keydown', (e)=>{
+      if(e.key==='ArrowRight') go(1);
+      if(e.key==='ArrowLeft')  go(-1);
+    });
 
-    nextButton.addEventListener('click', showNext);
-    prevButton.addEventListener('click', showPrev);
+    // swipe / drag
+    let dragging=false, startX=0, lastX=0;
+    viewport.addEventListener('pointerdown', e=>{
+      dragging=true; startX=e.clientX; lastX=startX;
+      viewport.setPointerCapture(e.pointerId);
+      track.style.transition='none';
+    });
+    viewport.addEventListener('pointermove', e=>{
+      if(!dragging) return;
+      const dx = e.clientX - lastX; lastX=e.clientX;
+      const m = new DOMMatrixReadOnly(getComputedStyle(track).transform);
+      track.style.transform = `translate3d(${m.m41 + dx}px,0,0)`;
+    });
+    viewport.addEventListener('pointerup', e=>{
+      if(!dragging) return; dragging=false; track.style.transition='transform .5s ease';
+      const moved = e.clientX - startX;
+      const threshold = slides[current].offsetWidth * 0.18;
+      if (moved < -threshold) go(1);
+      else if (moved > threshold) go(-1);
+      else apply(false);
+    });
 
-    updateCarousel();
+    // initial center & keep centered on resize
+    apply(true);
+    window.addEventListener('resize', ()=>apply(true));
   </script>
 </body>
 </html>

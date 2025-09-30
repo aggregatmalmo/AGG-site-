@@ -1,54 +1,115 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Releases — AGGREGAT</title>
-  <link rel="icon" href="assets/favicon.ico" />
+
   <style>
     :root{
-      --ink:#111; --muted:#555;
-      --panel:#f5f5f5;   /* lighter panel */
-      --page:#fafafa;    /* very light page background */
-      --line:#e0e0e0;    /* softer borders */
-      --accent:#d3ff3a;
+      --ink:#111;
+      --muted:#555;
+      --page:#f6f6f6;      /* same light vibe as About */
+      --line:#e2e2e2;
+      --pill:#ffffff;      /* nav pill background */
+      --pill-border:#cccccc;
+      --pill-active:#000000; /* active pill is black like your other pages */
     }
     *{box-sizing:border-box}
-    body{margin:0;font-family:Arial,Helvetica,sans-serif;color:var(--ink);background:var(--page);line-height:1.5}
-    header{position:fixed;top:0;left:0;right:0;z-index:40;padding:.8rem 0;
-      border-bottom:1px solid #ddd;background:rgba(255,255,255,.78);backdrop-filter:blur(8px)}
-    .container{width:min(1200px,92vw);margin:0 auto}
-    .nav{display:flex;align-items:center;justify-content:space-between;gap:1rem}
-    .brand{color:#111;font-weight:600;letter-spacing:.12em;text-transform:uppercase}
-    .brand .dot{display:inline-block;width:.55rem;height:.55rem;background:var(--accent);border-radius:999px;box-shadow:0 0 14px var(--accent);margin-right:.5rem}
-    .links{display:flex;gap:.6rem;align-items:center}
-    .links a{display:inline-block;border:1px solid #ccc;border-radius:999px;padding:.35rem .7rem;background:#fff;color:#000;font-weight:600;font-size:.8rem}
-    .links a.active{background:var(--accent);color:#000;border-color:transparent}
+    body{
+      margin:0; background:var(--page); color:var(--ink);
+      font-family:Arial,Helvetica,sans-serif; line-height:1.5;
+    }
+
+    /* HEADER (matches your other pages) */
+    header{
+      position:fixed; top:0; left:0; right:0; z-index:40;
+      padding:.8rem 0; border-bottom:1px solid #ddd;
+      background:rgba(255,255,255,.78); backdrop-filter:blur(8px);
+    }
+    .container{width:min(1200px,92vw); margin:0 auto}
+    .nav{display:flex; align-items:center; justify-content:space-between; gap:1rem}
+    .brand{color:#111; font-weight:600; letter-spacing:.12em; text-transform:uppercase}
+    .brand .dot{display:inline-block; width:.55rem; height:.55rem; background:#c7f37a; border-radius:999px; box-shadow:0 0 12px #c7f37a; margin-right:.5rem}
+    .links{display:flex; gap:.6rem; align-items:center}
+    .links a{
+      display:inline-block; padding:.35rem .7rem; border-radius:999px;
+      background:var(--pill); border:1px solid var(--pill-border);
+      color:#000; font-weight:600; font-size:.8rem; text-decoration:none;
+    }
+    .links a.active{background:var(--pill-active); color:#fff; border-color:var(--pill-active);}
+
     main{padding-top:90px}
-    h1{font-size:1.6rem;text-transform:uppercase;letter-spacing:.08em;margin:1.2rem 0 1.2rem;color:#111}
-    .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:26px}
-    .tile{grid-column:span 4;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:22px}
-    @media (max-width:1000px){ .tile{grid-column:span 6} }
-    @media (max-width:640px){ .tile{grid-column:1/-1} }
-    .sleeve{position:relative;background:#fff;border-radius:10px;overflow:hidden;
+    h1{font-size:1.6rem; text-transform:uppercase; letter-spacing:.08em; margin:1.2rem 0 1.2rem}
+
+    /* SLIDER ROW */
+    .slider-wrap{position:relative}
+    .rail{
+      display:flex; gap:24px; overflow-x:auto; scroll-snap-type:x mandatory;
+      padding:8px 6px 14px; scrollbar-width:none; /* FF */
+    }
+    .rail::-webkit-scrollbar{display:none} /* Chrome/Safari */
+    .tile{
+      flex:0 0 320px; scroll-snap-align:start; background:#fff;
+      border:1px solid var(--line); border-radius:14px; padding:18px;
+      box-shadow:0 8px 20px rgba(0,0,0,.08);
+    }
+
+    /* Vinyl sleeve (square, with spine + soft inner) */
+    .sleeve{
+      position:relative; background:#fff; overflow:hidden; border-radius:0;
       box-shadow:0 14px 28px rgba(0,0,0,.18), 0 40px 80px rgba(0,0,0,.15);
-      transition:transform .25s ease, box-shadow .25s ease, filter .25s ease;}
-    .sleeve img{display:block;width:100%;aspect-ratio:1/1;object-fit:cover}
-    .sleeve::before{content:"";position:absolute;inset:0;border-radius:10px;
-      box-shadow:inset 0 0 0 1px rgba(0,0,0,.05), inset 0 40px 80px rgba(0,0,0,.10), inset 0 -30px 60px rgba(0,0,0,.06);}
-    .sleeve::after{content:"";position:absolute;left:0;top:0;bottom:0;width:12px;
-      background:linear-gradient(90deg, rgba(0,0,0,.15), rgba(0,0,0,0));opacity:.3;}
-    .tile:hover .sleeve{transform:translateY(-10px);
-      box-shadow:0 18px 36px rgba(0,0,0,.22), 0 70px 120px rgba(0,0,0,.20);filter:saturate(1.03);}
-    .sticker{position:absolute;top:12px;right:12px;background:#fff;color:#000;
-      border-radius:999px;padding:.38rem .62rem;font-weight:700;font-size:.75rem;box-shadow:0 8px 20px rgba(0,0,0,.20);}
-    .info{padding:18px 6px 0}
-    .cat{font-weight:800;letter-spacing:.05em;margin-bottom:6px}
+      transition:transform .25s ease, box-shadow .25s ease, filter .25s ease;
+    }
+    .sleeve img{display:block; width:100%; aspect-ratio:1/1; object-fit:cover}
+    .sleeve::before{
+      content:""; position:absolute; inset:0;
+      box-shadow:
+        inset 0 0 0 1px rgba(0,0,0,.05),
+        inset 0 40px 80px rgba(0,0,0,.10),
+        inset 0 -30px 60px rgba(0,0,0,.06);
+      pointer-events:none;
+    }
+    .sleeve::after{
+      content:""; position:absolute; left:0; top:0; bottom:0; width:14px;
+      background:linear-gradient(90deg, rgba(0,0,0,.18), rgba(0,0,0,0)); opacity:.35;
+    }
+    .tile:hover .sleeve{
+      transform:translateY(-8px); filter:saturate(1.04);
+      box-shadow:0 18px 36px rgba(0,0,0,.22), 0 70px 120px rgba(0,0,0,.20);
+    }
+
+    .sticker{
+      position:absolute; top:.6rem; right:.6rem; background:#fff;
+      padding:.2rem .55rem; font-size:.74rem; font-weight:700;
+      border-radius:999px; box-shadow:0 2px 6px rgba(0,0,0,.15);
+    }
+    .info{margin-top:12px}
+    .cat{font-size:.8rem; font-weight:800; margin-bottom:.25rem}
     .artist{font-weight:800}
-    .title{color:var(--muted);margin-top:2px}
-    .cta{margin-top:12px}
-    .btn{display:inline-block;border:1px solid #000;border-radius:999px;padding:.55rem 1rem;font-weight:700;text-transform:uppercase;font-size:.8rem}
-    .btn.primary{background:#000;color:#fff}
+    .title{color:var(--muted); margin-top:2px}
+    .btn{
+      display:inline-block; margin-top:.7rem; padding:.42rem .9rem;
+      border-radius:999px; background:#000; color:#fff; text-decoration:none;
+      font-size:.8rem; font-weight:700;
+    }
+
+    /* Arrow buttons */
+    .arrow{
+      position:absolute; top:50%; transform:translateY(-50%);
+      width:42px; height:42px; border-radius:999px;
+      border:1px solid var(--pill-border); background:#fff; color:#000;
+      display:grid; place-items:center; cursor:pointer; user-select:none;
+      box-shadow:0 6px 16px rgba(0,0,0,.12);
+    }
+    .arrow:hover{background:#000; color:#fff; border-color:#000}
+    .arrow.left{left:-4px}
+    .arrow.right{right:-4px}
+
+    @media (max-width:760px){
+      .tile{flex-basis:260px}
+      .arrow{display:none} /* swipe on mobile */
+    }
   </style>
 </head>
 <body>
@@ -59,84 +120,89 @@
         <a href="index.html">Home</a>
         <a href="about.html">About</a>
         <a href="releases.html" class="active">Releases</a>
-        <a href="https://instagram.com/aggregat040" target="_blank">IG</a>
-        <a href="#">SC</a>
-        <a href="#">FB</a>
+        <a href="https://instagram.com/aggregat040" target="_blank" rel="noopener">IG</a>
+        <a href="#" target="_blank" rel="noopener">SC</a>
+        <a href="#" target="_blank" rel="noopener">FB</a>
       </nav>
     </div>
   </header>
 
   <main class="container">
     <h1>Releases</h1>
-    <div class="grid">
-      <!-- AGG001 -->
-      <article class="tile">
-        <div class="sleeve">
-          <img src="assets/raft001.jpg" alt="AGG001 cover art">
-          <span class="sticker">AGG001 · 12”</span>
-        </div>
-        <div class="info">
-          <div class="cat">AGG001</div>
-          <div class="artist">Various Artists</div>
-          <div class="title">RAFT001 Compilation</div>
-          <div class="cta"><a class="btn primary" href="#">Bandcamp</a></div>
-        </div>
-      </article>
 
-      <!-- AGG002 -->
-      <article class="tile">
-        <div class="sleeve">
-          <img src="assets/raddler-express.jpg" alt="AGG002 cover art">
-          <span class="sticker">AGG002</span>
-        </div>
-        <div class="info">
-          <div class="cat">AGG002</div>
-          <div class="artist">Raddler Express</div>
-          <div class="title">Express EP</div>
-          <div class="cta"><a class="btn primary" href="#">Bandcamp</a></div>
-        </div>
-      </article>
+    <div class="slider-wrap">
+      <button class="arrow left" aria-label="Prev" id="prevBtn">‹</button>
+      <div class="rail" id="rail">
+        <!-- ORDER: move these blocks up/down to change order -->
+        <!-- AGG001 -->
+        <article class="tile">
+          <div class="sleeve">
+            <img src="assets/raft001.jpg" alt="AGG001 cover">
+            <span class="sticker">AGG001 · 12”</span>
+          </div>
+          <div class="info">
+            <div class="cat">AGG001</div>
+            <div class="artist">Various Artists</div>
+            <div class="title">RAFT001 Compilation</div>
+            <a href="#" class="btn">Bandcamp</a>
+          </div>
+        </article>
 
-      <!-- AGG003 -->
-      <article class="tile">
-        <div class="sleeve">
-          <img src="assets/speedbump-vol2.jpg" alt="AGG003 cover art">
-          <span class="sticker">AGG003</span>
-        </div>
-        <div class="info">
-          <div class="cat">AGG003</div>
-          <div class="artist">Various Artists</div>
-          <div class="title">Speed Bump Vol. 2</div>
-          <div class="cta"><a class="btn primary" href="#">Bandcamp</a></div>
-        </div>
-      </article>
+        <!-- AGG002 — Raddler Express -->
+        <article class="tile">
+          <div class="sleeve">
+            <img src="assets/raddler-express.jpg" alt="AGG002 cover">
+            <span class="sticker">AGG002</span>
+          </div>
+          <div class="info">
+            <div class="cat">AGG002</div>
+            <div class="artist">Raddler Express</div>
+            <div class="title">Express EP</div>
+            <a href="#" class="btn">Bandcamp</a>
+          </div>
+        </article>
 
-      <!-- AGG004 — [T001] -->
-      <article class="tile">
-        <div class="sleeve">
-          <img src="assets/t001.jpg" alt="AGG004 cover art">
-          <span class="sticker">AGG004</span>
-        </div>
-        <div class="info">
-          <div class="cat">AGG004</div>
-          <div class="artist">Various Artists</div>
-          <div class="title">[T001]</div>
-          <div class="cta"><a class="btn primary" href="#">Bandcamp</a></div>
-        </div>
-      </article>
+        <!-- AGG003 — Speed Bump Vol. 2 -->
+        <article class="tile">
+          <div class="sleeve">
+            <img src="assets/speedbump-vol2.jpg" alt="AGG003 cover">
+            <span class="sticker">AGG003</span>
+          </div>
+          <div class="info">
+            <div class="cat">AGG003</div>
+            <div class="artist">Various Artists</div>
+            <div class="title">Speed Bump Vol. 2</div>
+            <a href="#" class="btn">Bandcamp</a>
+          </div>
+        </article>
+
+        <!-- AGG004 — [T001] -->
+        <article class="tile">
+          <div class="sleeve">
+            <img src="assets/t001.jpg" alt="AGG004 cover">
+            <span class="sticker">AGG004</span>
+          </div>
+          <div class="info">
+            <div class="cat">AGG004</div>
+            <div class="artist">Various Artists</div>
+            <div class="title">[T001]</div>
+            <a href="#" class="btn">Bandcamp</a>
+          </div>
+        </article>
+      </div>
+      <button class="arrow right" aria-label="Next" id="nextBtn">›</button>
     </div>
   </main>
 
-  <footer style="padding:6vh 0 8vh;border-top:1px solid var(--line);color:#333">
-    <div class="container" style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem">
-      <div>© <span id="year"></span> AGGREGAT</div>
-      <div class="links">
-        <a href="https://instagram.com/aggregat040" target="_blank">Instagram</a>
-        <a href="#">SoundCloud</a>
-        <a href="#">Facebook</a>
-      </div>
-    </div>
-  </footer>
-  <script>document.getElementById('year').textContent=new Date().getFullYear();</script>
+  <script>
+    // simple arrow controls for horizontal slider
+    const rail = document.getElementById('rail');
+    const prev = document.getElementById('prevBtn');
+    const next = document.getElementById('nextBtn');
+    const step = 360; // pixels to scroll per click
+
+    prev.addEventListener('click', () => rail.scrollBy({left: -step, behavior: 'smooth'}));
+    next.addEventListener('click', () => rail.scrollBy({left:  step, behavior: 'smooth'}));
+  </script>
 </body>
 </html>

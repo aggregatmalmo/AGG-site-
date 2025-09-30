@@ -55,22 +55,27 @@
       box-shadow:0 16px 42px rgba(0,0,0,.12), 0 8px 18px rgba(0,0,0,.08);
     }
 
-    /* Vinyl sleeve (square with spine + inner bevel) */
-    .sleeve{
-      position:relative; background:#fff; overflow:hidden; border-radius:0;
-      /* HEAVIER sleeve shadow for “on-table” feel */
-      box-shadow:0 24px 60px rgba(0,0,0,.28), 0 10px 24px rgba(0,0,0,.18);
-      transition:transform .25s ease, box-shadow .25s ease, filter .25s ease;
-    }
-    .sleeve img{display:block; width:100%; aspect-ratio:1/1; object-fit:cover}
-    .sleeve::before{
-      content:""; position:absolute; inset:0;
-      box-shadow:
-        inset 0 0 0 1px rgba(0,0,0,.06),
-        inset 0 40px 80px rgba(0,0,0,.12),
-        inset 0 -30px 60px rgba(0,0,0,.08);
-      pointer-events:none;
-    }
+   /* Vinyl sleeves */
+.sleeve {
+  position: relative;
+  background: #fff;
+  overflow: hidden;
+  border-radius: 0; /* no rounded corners */
+  box-shadow: 
+    0 8px 18px rgba(0,0,0,.25),   /* soft base shadow */
+    0 20px 40px rgba(0,0,0,.20),  /* deeper background shadow */
+    0 2px 6px rgba(0,0,0,.3) inset; /* faint inset shadow for sleeve depth */
+  transition: transform .3s ease, box-shadow .3s ease, filter .3s ease;
+}
+
+.tile:hover .sleeve {
+  transform: translateY(-14px) scale(1.03); /* pop out */
+  box-shadow: 
+    0 14px 28px rgba(0,0,0,.35),
+    0 50px 100px rgba(0,0,0,.30),
+    0 6px 12px rgba(0,0,0,.4) inset;
+  filter: saturate(1.08) contrast(1.05);
+}
     .sleeve::after{
       content:""; position:absolute; left:0; top:0; bottom:0; width:14px;
       background:linear-gradient(90deg, rgba(0,0,0,.20), rgba(0,0,0,0)); opacity:.38;

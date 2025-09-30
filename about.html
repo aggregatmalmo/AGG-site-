@@ -1,101 +1,73 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>About — AGGREGAT</title>
-  <meta name="description" content="About Aggregat — Malmö-based underground platform." />
-  <link rel="icon" href="assets/favicon.ico" />
-  <style>
-    :root{ --bg:#fafafa; --paper:#fff; --ink:#111; --muted:#6b6b6b; --line:#e9e9e9; }
-    *{box-sizing:border-box}
-    body{margin:0;background:var(--bg);color:var(--ink);font-family:Arial,Helvetica,sans-serif;line-height:1.55}
-    a{color:inherit;text-decoration:none}
-    .wrap{width:min(1080px,92vw);margin:0 auto}
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>About — AGGREGAT</title>
+<style>
+  :root{
+    --ink:#E9E9EA; --muted:#B6B7BA; --page:#15171A; --surface:#1B1D21; --line:#2A2D33;
+    --pill:#22252A; --pill-active:#EDEEEF; --pill-text:#0F1012;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; color:var(--ink);
+    background:
+      radial-gradient(1100px 800px at 50% -10%, rgba(255,255,255,.06), transparent 60%),
+      radial-gradient(1000px 800px at 85% 120%, rgba(255,255,255,.05), transparent 60%),
+      linear-gradient(180deg,#1A1C20 0%,#14161A 60%,#121318 100%);
+    font-family:Arial, Helvetica, sans-serif; line-height:1.6;
+  }
+  header{
+    position:sticky; top:0; z-index:50;
+    background:rgba(27,29,33,.78); backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+    padding:14px 22px; display:flex; justify-content:space-between; align-items:center;
+  }
+  .logo{font-weight:700; letter-spacing:.12em}
+  nav{display:flex; gap:8px}
+  nav a{
+    text-decoration:none; color:var(--ink); background:var(--pill); border:1px solid var(--line);
+    padding:6px 14px; border-radius:6px; font-weight:600; font-size:.9rem;
+    transition:background .2s,color .2s,border-color .2s;
+  }
+  nav a.active, nav a:hover{background:var(--pill-active); color:var(--pill-text); border-color:transparent}
 
-    /* Header */
-    header{position:sticky;top:0;z-index:10;background:rgba(255,255,255,.85);
-      backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
-    .nav{display:flex;justify-content:space-between;align-items:center;padding:14px 0}
-    .brand{font-weight:600;letter-spacing:.12em;text-transform:uppercase}
-    .links{display:flex;gap:.6rem;align-items:center}
-    .chip{display:inline-flex;align-items:center;border:1px solid var(--line);border-radius:999px;
-      padding:.28rem .7rem;font-size:.8rem;background:#fff}
-    .chip.active{background:#111;color:#fff;border-color:#111}
-
-    /* Page */
-    main{padding:7vh 0}
-    h1{font-size:1.6rem;margin:0 0 1.2rem;text-transform:uppercase;letter-spacing:.08em}
-    h2{margin:2.4rem 0 .8rem;font-size:1rem;color:var(--muted);letter-spacing:.12em;text-transform:uppercase}
-    p{margin:1rem 0}
-    .grid{display:grid;grid-template-columns:1fr;gap:24px}
-    .card{background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:18px}
-    ul{list-style:none;margin:0;padding:0}
-    li{padding:.35rem 0;font-weight:600}
-
-    /* Footer */
-    footer{border-top:1px solid var(--line);padding:5vh 0;color:var(--muted);text-align:center}
-  </style>
+  main{width:min(900px,92vw); margin:28px auto 80px}
+  h1{margin:0 0 14px; font-size:1.9rem}
+  .panel{
+    background:var(--surface); border:1px solid var(--line); border-radius:12px;
+    padding:22px 22px;
+    box-shadow:0 14px 36px rgba(0,0,0,.22);
+  }
+  .muted{color:var(--muted)}
+  .list{margin:14px 0 0; padding-left:18px}
+</style>
 </head>
 <body>
-  <!-- Header -->
-  <header>
-    <div class="wrap nav">
-      <div class="brand">AGGREGAT</div>
-      <nav class="links" aria-label="primary">
-        <a class="chip" href="./">Home</a>
-        <a class="chip" href="releases.html">Releases</a>
-        <a class="chip active" href="about.html">About</a>
-        <a class="chip" href="https://instagram.com/aggregat040" target="_blank" rel="noopener">IG</a>
-        <a class="chip" href="#" target="_blank" rel="noopener">SC</a>
-        <a class="chip" href="#" target="_blank" rel="noopener">FB</a>
-      </nav>
-    </div>
-  </header>
+<header>
+  <div class="logo">AGGREGAT</div>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="releases.html">Releases</a>
+    <a href="about.html" class="active">About</a>
+  </nav>
+</header>
 
-  <!-- Content -->
-  <main class="wrap">
-    <h1>About</h1>
-
-    <div class="grid">
-      <!-- Bio -->
-      <section class="card">
-        <p><strong>AGGREGAT — Events • Label • Mix Series</strong></p>
-
-        <p>Deeply rooted in Malmö’s underground, <strong>AGGREGAT</strong> has grown into a curated system of open airs, club nights, and cross-disciplinary projects exploring raw sound, visual identity, and uncompromising energy.</p>
-
-        <p>In recent years, the platform has evolved further under the direction of artist and founder <strong>BXY Santiago</strong>, working closely with a fluid network of collaborators.</p>
-
-        <p>Grounded in <strong>DIY ethics, inclusivity, and underground pressure</strong>, AGGREGAT has partnered with clubs, collectives, and cultural institutions across Malmö to develop its independent voice.</p>
-
-        <p><strong>2025</strong> marks a new chapter as AGGREGAT expands into label territory with the debut <strong>various artists compilation, RAFT001</strong>, curated by <strong>BXY Santiago</strong> and <strong>Christoffer Polizonis (Bad Balance)</strong>.</p>
-      </section>
-
-      <!-- Residents -->
-      <section class="card">
-        <h2>Residents</h2>
-        <ul>
-          <li>BXY SANTIAGO (Founder)</li>
-          <li>MONTY PARTY</li>
-          <li>NYKTON</li>
-          <li>TINDRA</li>
-        </ul>
-      </section>
-
-      <!-- Contact -->
-      <section class="card">
-        <h2>Contact</h2>
-        <p>Email: <a href="mailto:hello@aggregat040.com">hello@aggregat040.com</a></p>
-        <p>Instagram: <a href="https://instagram.com/aggregat040" target="_blank" rel="noopener">@aggregat040</a></p>
-      </section>
-    </div>
-  </main>
-
-  <!-- Footer -->
-  <footer>
-    © <span id="year"></span> AGGREGAT
-  </footer>
-
-  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+<main>
+  <h1>About</h1>
+  <section class="panel">
+    <p><strong>AGGREGAT</strong> is a Malmö-based underground platform focused on <strong>events, label releases, and mix archives</strong>.</p>
+    <p class="muted">
+      Originally founded by <strong>BXY Santiago</strong> together with friends, Aggregat has evolved into a curated system of open airs, club nights,
+      and cross-disciplinary events exploring raw sound, visual identity, and uncompromising energy. In recent years, the platform has been led by BXY,
+      working with a fluid network of artists and collaborators. Rooted in DIY ethics and inclusivity, Aggregat develops an independent voice across Malmö.
+    </p>
+    <p>
+      2025 marks a new chapter with the debut various artists compilation <strong>RAFT001</strong>, curated by <strong>BXY Santiago</strong> and
+      <strong>Christoffer Polizonis</strong>.
+    </p>
+     </section>
+</main>
 </body>
 </html>

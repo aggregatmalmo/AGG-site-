@@ -1,255 +1,245 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Releases — AGGREGAT</title>
-  <style>
-    :root{
-      --ink:#111;
-      --muted:#555;
-      --page:#f6f6f6;
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Releases — AGGREGAT</title>
+<style>
+  :root{
+    --ink:#E9E9EA; --muted:#B6B7BA; --page:#15171A; --surface:#1B1D21; --line:#2A2D33;
+    --pill:#22252A; --pill-active:#EDEEEF; --pill-text:#0F1012;
 
-      /* Carousel tuning — smaller, cleaner */
-      --gap: 8vw;                               /* space between slides */
-      --slideW: clamp(220px, 38vw, 540px);      /* center cover width */
-      --sideScale: .80;                         /* side peek scale */
-      --sideOpacity: .68;                       /* side peek opacity */
-    }
-    *{box-sizing:border-box}
-    body{margin:0;background:var(--page);color:var(--ink);font-family:Arial,Helvetica,sans-serif;line-height:1.5}
+    /* carousel tuning (smaller, airy) */
+    --gap: 8vw;
+    --slideW: clamp(220px, 38vw, 540px);
+    --sideScale: .80;
+    --sideOpacity: .68;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; color:var(--ink);
+    background:
+      radial-gradient(1100px 800px at 50% -10%, rgba(255,255,255,.06), transparent 60%),
+      radial-gradient(1000px 800px at 85% 120%, rgba(255,255,255,.05), transparent 60%),
+      linear-gradient(180deg,#1A1C20 0%,#14161A 60%,#121318 100%);
+    font-family:Arial, Helvetica, sans-serif; line-height:1.5;
+  }
+  header{
+    position:sticky; top:0; z-index:50;
+    background:rgba(27,29,33,.78); backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+    padding:14px 22px; display:flex; justify-content:space-between; align-items:center;
+  }
+  .logo{font-weight:700; letter-spacing:.12em}
+  nav{display:flex; gap:8px}
+  nav a{
+    text-decoration:none; color:var(--ink); background:var(--pill); border:1px solid var(--line);
+    padding:6px 14px; border-radius:6px; font-weight:600; font-size:.9rem;
+    transition:background .2s,color .2s,border-color .2s;
+  }
+  nav a.active, nav a:hover{background:var(--pill-active); color:var(--pill-text); border-color:transparent}
 
-    /* Header — square tabs, no borders */
-    header{
-      position:sticky; top:0; z-index:50;
-      background:#fff; border-bottom:1px solid #ddd;
-      padding:14px 22px;
-      display:flex; align-items:center; justify-content:space-between;
-    }
-    .logo{font-weight:700; letter-spacing:.12em}
-    nav{display:flex; gap:8px}
-    nav a{
-      text-decoration:none; color:#000; font-weight:600; font-size:.9rem;
-      padding:6px 14px; border:none; border-radius:6px; /* square, no outline */
-      background:transparent;
-    }
-    nav a.active, nav a:hover{background:#000; color:#fff}
+  h1{margin:18px 0 6px; text-align:center; font-size:1.85rem}
 
-    main{padding-top:10px}
-    h1{margin:18px 0 6px; text-align:center; font-size:1.85rem}
+  /* carousel layout */
+  .carousel{position:relative; max-width:100vw; margin:6px auto 56px; overflow:hidden}
+  .viewport{position:relative; width:100%}
+  .track{
+    display:flex; align-items:center; gap:var(--gap);
+    will-change:transform; transform:translate3d(0,0,0); transition:transform .5s ease;
+    padding:0 calc(var(--gap)/2);
+  }
+  .slide{
+    width:var(--slideW); flex:0 0 var(--slideW);
+    display:flex; flex-direction:column; align-items:center;
+    transition:transform .5s ease, opacity .5s ease;
+  }
+  .sleeve{
+    width:100%; background:#fff; overflow:hidden; border-radius:0;
+    box-shadow:0 18px 54px rgba(0,0,0,.18), 0 8px 22px rgba(0,0,0,.14);
+  }
+  .sleeve img{display:block; width:100%; height:auto}
 
-    /* Carousel layout */
-    .carousel{position:relative; max-width:100vw; margin:6px auto 56px; overflow:hidden}
-    .viewport{position:relative; width:100%}
-    .track{
-      display:flex; align-items:center; gap:var(--gap);
-      will-change:transform; transform:translate3d(0,0,0); transition:transform .5s ease;
-      padding:0 calc(var(--gap)/2);
-    }
-    .slide{
-      width:var(--slideW); flex:0 0 var(--slideW);
-      display:flex; flex-direction:column; align-items:center;
-      transition:transform .5s ease, opacity .5s ease;
-    }
+  .slide:not(.active){ transform:scale(var(--sideScale)); opacity:var(--sideOpacity); }
+  .meta{display:none; margin-top:12px; text-align:center}
+  .slide.active .meta{display:block}
+  .cat{font-weight:700; font-size:.92rem}
+  .artist{font-weight:800; font-size:1.08rem; margin-top:2px}
+  .title{color:var(--muted); margin-top:2px}
+  .btn{
+    display:inline-block; margin-top:.6rem; padding:.48rem 1.05rem; border-radius:6px;
+    background:var(--pill-active); color:var(--pill-text); text-decoration:none; font-weight:700; font-size:.9rem;
+    border:1px solid transparent;
+  }
 
-    /* Sleeve — crisp square with clean shadow */
-    .sleeve{
-      width:100%; background:#fff; overflow:hidden; border-radius:0;
-      box-shadow:0 18px 54px rgba(0,0,0,.18), 0 8px 22px rgba(0,0,0,.14);
-    }
-    .sleeve img{display:block; width:100%; height:auto}
+  /* arrows (tall translucent rectangles, big chevrons) */
+  .arrow{
+    position:absolute; top:50%; transform:translateY(-50%);
+    width:46px; height:128px; border-radius:6px; background:rgba(255,255,255,.10);
+    color:#FFF; border:none; display:grid; place-items:center; cursor:pointer;
+    box-shadow:0 12px 34px rgba(0,0,0,.30);
+    opacity:.92; transition:background .2s, opacity .2s;
+    z-index:5; font-size:2.6rem; font-weight:900; line-height:0;
+  }
+  .arrow:hover{background:rgba(255,255,255,.18); opacity:1}
+  .arrow.left{left:14px}
+  .arrow.right{right:14px}
 
-    /* Center vs side */
-    .slide:not(.active){ transform:scale(var(--sideScale)); opacity:var(--sideOpacity); }
-    .meta{display:none; margin-top:12px; text-align:center}
-    .slide.active .meta{display:block}
-    .cat{font-weight:700; font-size:.92rem}
-    .artist{font-weight:800; font-size:1.08rem; margin-top:2px}
-    .title{color:var(--muted); margin-top:2px}
-    .btn{
-      display:inline-block; margin-top:.6rem; padding:.48rem 1.05rem; border-radius:6px;
-      background:#000; color:#fff; text-decoration:none; font-weight:700; font-size:.9rem
-    }
-
-    /* Arrows — tall, semi-transparent rectangles with BIG chevrons */
-    .arrow{
-      position:absolute; top:50%; transform:translateY(-50%);
-      width:46px; height:128px; border-radius:6px;
-      background:rgba(0,0,0,.34); color:#fff; border:none;
-      display:grid; place-items:center; cursor:pointer; user-select:none;
-      box-shadow:0 10px 30px rgba(0,0,0,.18);
-      opacity:.9; transition:opacity .2s, background .2s;
-      z-index:5; font-size:2.6rem; font-weight:900; line-height:0;
-    }
-    .arrow:hover{background:rgba(0,0,0,.55)}
-    .arrow.left{left:14px}
-    .arrow.right{right:14px}
-
-    /* Mobile tweaks */
-    @media (max-width:900px){
-      :root{
-        --gap: 9vw;
-        --slideW: 78vw;   /* keep cover+text in view on laptops/tablets */
-        --sideScale: .86;
-        --sideOpacity: .82;
-      }
-      .arrow{height:110px}
-    }
-    @media (max-width:640px){
-      .arrow{display:none} /* swipe on mobile */
-      nav a{padding:5px 10px}
-    }
-  </style>
+  @media (max-width:900px){
+    :root{ --gap: 9vw; --slideW: 78vw; --sideScale:.86; --sideOpacity:.82; }
+    .arrow{height:110px}
+  }
+  @media (max-width:640px){
+    .arrow{display:none} /* swipe on mobile */
+    nav a{padding:5px 10px}
+  }
+</style>
 </head>
 <body>
-  <header>
-    <div class="logo">AGGREGAT</div>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="releases.html" class="active">Releases</a>
-      <a href="about.html">About</a>
-    </nav>
-  </header>
+<header>
+  <div class="logo">AGGREGAT</div>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="releases.html" class="active">Releases</a>
+    <a href="about.html">About</a>
+  </nav>
+</header>
 
-  <main>
-    <h1>Releases</h1>
+<main>
+  <h1>Releases</h1>
 
-    <section class="carousel" id="carousel">
-      <button class="arrow left" id="prevBtn" aria-label="Previous">‹</button>
+  <section class="carousel" id="carousel">
+    <button class="arrow left" id="prevBtn" aria-label="Previous">‹</button>
 
-      <div class="viewport" id="viewport">
-        <div class="track" id="track">
-          <!-- ORIGINALS (order these how you want) -->
-          <article class="slide">
-            <div class="sleeve"><img src="assets/raft001.jpg" alt="AGG001 cover"></div>
-            <div class="meta">
-              <div class="cat">AGG001</div>
-              <div class="artist">Various Artists</div>
-              <div class="title">RAFT001 Compilation</div>
-              <a class="btn" href="#">Bandcamp</a>
-            </div>
-          </article>
+    <div class="viewport" id="viewport">
+      <div class="track" id="track">
+        <!-- Originals -->
+        <article class="slide">
+          <div class="sleeve"><img src="assets/raft001.jpg" alt="AGG001 cover"></div>
+          <div class="meta">
+            <div class="cat">AGG001</div>
+            <div class="artist">Various Artists</div>
+            <div class="title">RAFT001 Compilation</div>
+            <a class="btn" href="#">Bandcamp</a>
+          </div>
+        </article>
 
-          <article class="slide">
-            <div class="sleeve"><img src="assets/raddler-express.jpg" alt="AGG002 cover"></div>
-            <div class="meta">
-              <div class="cat">AGG002</div>
-              <div class="artist">Raddler Express</div>
-              <div class="title">Express EP</div>
-              <a class="btn" href="#">Bandcamp</a>
-            </div>
-          </article>
+        <article class="slide">
+          <div class="sleeve"><img src="assets/raddler-express.jpg" alt="AGG002 cover"></div>
+          <div class="meta">
+            <div class="cat">AGG002</div>
+            <div class="artist">Raddler Express</div>
+            <div class="title">Express EP</div>
+            <a class="btn" href="#">Bandcamp</a>
+          </div>
+        </article>
 
-          <article class="slide">
-            <div class="sleeve"><img src="assets/speedbump-vol2.jpg" alt="AGG003 cover"></div>
-            <div class="meta">
-              <div class="cat">AGG003</div>
-              <div class="artist">Various Artists</div>
-              <div class="title">Speed Bump Vol. 2</div>
-              <a class="btn" href="#">Bandcamp</a>
-            </div>
-          </article>
+        <article class="slide">
+          <div class="sleeve"><img src="assets/speedbump-vol2.jpg" alt="AGG003 cover"></div>
+          <div class="meta">
+            <div class="cat">AGG003</div>
+            <div class="artist">Various Artists</div>
+            <div class="title">Speed Bump Vol. 2</div>
+            <a class="btn" href="#">Bandcamp</a>
+          </div>
+        </article>
 
-          <article class="slide">
-            <div class="sleeve"><img src="assets/t001.jpg" alt="AGG004 cover"></div>
-            <div class="meta">
-              <div class="cat">AGG004</div>
-              <div class="artist">Various Artists</div>
-              <div class="title">[T001]</div>
-              <a class="btn" href="#">Bandcamp</a>
-            </div>
-          </article>
-        </div>
+        <article class="slide">
+          <div class="sleeve"><img src="assets/t001.jpg" alt="AGG004 cover"></div>
+          <div class="meta">
+            <div class="cat">AGG004</div>
+            <div class="artist">Various Artists</div>
+            <div class="title">[T001]</div>
+            <a class="btn" href="#">Bandcamp</a>
+          </div>
+        </article>
       </div>
+    </div>
 
-      <button class="arrow right" id="nextBtn" aria-label="Next">›</button>
-    </section>
-  </main>
+    <button class="arrow right" id="nextBtn" aria-label="Next">›</button>
+  </section>
+</main>
 
-  <script>
-    // Infinite, centered carousel with peeking sides. Only active shows meta.
-    const viewport = document.getElementById('viewport');
-    const track = document.getElementById('track');
-    const prev = document.getElementById('prevBtn');
-    const next = document.getElementById('nextBtn');
+<script>
+  // Infinite, centered carousel with peeking sides; only active shows meta.
+  const viewport = document.getElementById('viewport');
+  const track = document.getElementById('track');
+  const prev = document.getElementById('prevBtn');
+  const next = document.getElementById('nextBtn');
 
-    // Clone ends for seamless loop
-    const originals = Array.from(track.children);
-    const COUNT = originals.length;
+  const originals = Array.from(track.children);
+  const COUNT = originals.length;
 
-    function clone(where){
-      const clones = originals.map(el => {
-        const c = el.cloneNode(true);
-        c.classList.add('is-clone');
-        return c;
-      });
-      if(where==='before') clones.reverse().forEach(c=>track.insertBefore(c, track.firstChild));
-      else clones.forEach(c=>track.appendChild(c));
-    }
-    clone('before');
-    clone('after');
-
-    let slides = Array.from(track.children);
-    let current = COUNT; // start at first original
-
-    function centerOffset(i){
-      const item = slides[i];
-      const left = item.offsetLeft;
-      const w = item.offsetWidth;
-      const center = left + w/2;
-      return viewport.clientWidth/2 - center;
-    }
-    function apply(immediate=false){
-      const x = centerOffset(current);
-      track.style.transition = immediate ? 'none' : 'transform .5s ease';
-      track.style.transform = `translate3d(${x}px,0,0)`;
-      slides.forEach((s, idx)=> s.classList.toggle('active', idx===current));
-      if(immediate) requestAnimationFrame(()=>track.style.transition='transform .5s ease');
-    }
-    function normalize(){
-      if(current >= COUNT*2){ current -= COUNT; apply(true); }
-      else if(current < COUNT){ current += COUNT; apply(true); }
-    }
-    function go(dir){
-      current += dir;
-      apply(false);
-      clearTimeout(go._t); go._t = setTimeout(normalize, 520);
-    }
-
-    next.addEventListener('click', ()=>go(1));
-    prev.addEventListener('click', ()=>go(-1));
-
-    // keyboard
-    window.addEventListener('keydown', (e)=>{
-      if(e.key==='ArrowRight') go(1);
-      if(e.key==='ArrowLeft')  go(-1);
+  function clone(where){
+    const clones = originals.map(el => {
+      const c = el.cloneNode(true);
+      c.classList.add('is-clone');
+      return c;
     });
+    if(where==='before') clones.reverse().forEach(c=>track.insertBefore(c, track.firstChild));
+    else clones.forEach(c=>track.appendChild(c));
+  }
+  clone('before'); clone('after');
 
-    // swipe / drag
-    let dragging=false, startX=0, lastX=0;
-    viewport.addEventListener('pointerdown', e=>{
-      dragging=true; startX=e.clientX; lastX=startX;
-      viewport.setPointerCapture(e.pointerId);
-      track.style.transition='none';
-    });
-    viewport.addEventListener('pointermove', e=>{
-      if(!dragging) return;
-      const dx = e.clientX - lastX; lastX=e.clientX;
-      const m = new DOMMatrixReadOnly(getComputedStyle(track).transform);
-      track.style.transform = `translate3d(${m.m41 + dx}px,0,0)`;
-    });
-    viewport.addEventListener('pointerup', e=>{
-      if(!dragging) return; dragging=false; track.style.transition='transform .5s ease';
-      const moved = e.clientX - startX;
-      const threshold = slides[current].offsetWidth * 0.18;
-      if (moved < -threshold) go(1);
-      else if (moved > threshold) go(-1);
-      else apply(false);
-    });
+  let slides = Array.from(track.children);
+  let current = COUNT; // start at first original
 
-    // init & recenter on resize
-    apply(true);
-    window.addEventListener('resize', ()=>apply(true));
-  </script>
+  function centerOffset(i){
+    const item = slides[i];
+    const left = item.offsetLeft;
+    const w = item.offsetWidth;
+    const center = left + w/2;
+    return viewport.clientWidth/2 - center;
+  }
+  function apply(immediate=false){
+    const x = centerOffset(current);
+    track.style.transition = immediate ? 'none' : 'transform .5s ease';
+    track.style.transform = `translate3d(${x}px,0,0)`;
+    slides.forEach((s, idx)=> s.classList.toggle('active', idx===current));
+    if(immediate) requestAnimationFrame(()=>track.style.transition='transform .5s ease');
+  }
+  function normalize(){
+    if(current >= COUNT*2){ current -= COUNT; apply(true); }
+    else if(current < COUNT){ current += COUNT; apply(true); }
+  }
+  function go(dir){
+    current += dir;
+    apply(false);
+    clearTimeout(go._t); go._t = setTimeout(normalize, 520);
+  }
+  next.addEventListener('click', ()=>go(1));
+  prev.addEventListener('click', ()=>go(-1));
+
+  // keyboard
+  window.addEventListener('keydown', (e)=>{
+    if(e.key==='ArrowRight') go(1);
+    if(e.key==='ArrowLeft')  go(-1);
+  });
+
+  // swipe / drag
+  let dragging=false, startX=0, lastX=0;
+  viewport.addEventListener('pointerdown', e=>{
+    dragging=true; startX=e.clientX; lastX=startX;
+    viewport.setPointerCapture(e.pointerId);
+    track.style.transition='none';
+  });
+  viewport.addEventListener('pointermove', e=>{
+    if(!dragging) return;
+    const dx = e.clientX - lastX; lastX=e.clientX;
+    const m = new DOMMatrixReadOnly(getComputedStyle(track).transform);
+    track.style.transform = `translate3d(${m.m41 + dx}px,0,0)`;
+  });
+  viewport.addEventListener('pointerup', e=>{
+    if(!dragging) return; dragging=false; track.style.transition='transform .5s ease';
+    const moved = e.clientX - startX;
+    const threshold = slides[current].offsetWidth * 0.18;
+    if (moved < -threshold) go(1);
+    else if (moved > threshold) go(-1);
+    else apply(false);
+  });
+
+  apply(true);
+  window.addEventListener('resize', ()=>apply(true));
+</script>
 </body>
 </html>

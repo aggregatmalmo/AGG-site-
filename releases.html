@@ -196,36 +196,39 @@
     </div>
   </main>
 
-  <script>
-    // simple looping slider
-    const rail = document.getElementById('rail');
-    const prev = document.getElementById('prevBtn');
-    const next = document.getElementById('nextBtn');
+ <script>
+  const rail = document.getElementById('rail');
+  const prev = document.getElementById('prevBtn');
+  const next = document.getElementById('nextBtn');
 
-    // one tile width + gap (px) — matches .tile flex-basis (340) + gap (24)
-    const STEP = 364;
+  const STEP = 364; // one tile + gap
 
-    function goNext(){
-      const maxScroll = rail.scrollWidth - rail.clientWidth;
-      if (Math.ceil(rail.scrollLeft) >= maxScroll - 5){
-        // loop to start
-        rail.scrollTo({left: 0, behavior: 'smooth'});
-      } else {
-        rail.scrollBy({left: STEP, behavior: 'smooth'});
-      }
+  function goNext(){
+    const maxScroll = rail.scrollWidth - rail.clientWidth;
+    if (Math.ceil(rail.scrollLeft) >= maxScroll - 5){
+      rail.scrollTo({left: 0, behavior: 'smooth'});
+    } else {
+      rail.scrollBy({left: STEP, behavior: 'smooth'});
     }
-    function goPrev(){
-      if (rail.scrollLeft <= 5){
-        // loop to end
-        rail.scrollTo({left: rail.scrollWidth, behavior: 'instant'});
-        // small async to then scroll one step back smoothly
-        requestAnimationFrame(()=> rail.scrollBy({left: -STEP, behavior: 'smooth'}));
-      } else {
-        rail.scrollBy({left: -STEP, behavior: 'smooth'});
-      }
+  }
+  function goPrev(){
+    if (rail.scrollLeft <= 5){
+      rail.scrollTo({left: rail.scrollWidth, behavior: 'instant'});
+      requestAnimationFrame(()=> rail.scrollBy({left: -STEP, behavior: 'smooth'}));
+    } else {
+      rail.scrollBy({left: -STEP, behavior: 'smooth'});
     }
-    next.addEventListener('click', goNext);
-    prev.addEventListener('click', goPrev);
-  </script>
+  }
+
+  next.addEventListener('click', goNext);
+  prev.addEventListener('click', goPrev);
+
+  // --- AUTOPLAY ---
+  let autoSlide = setInterval(goNext, 4000); // every 4s
+  rail.addEventListener('mouseenter', () => clearInterval(autoSlide));
+  rail.addEventListener('mouseleave', () => {
+    autoSlide = setInterval(goNext, 4000);
+  });
+</script>
 </body>
 </html>

@@ -6,21 +6,21 @@
 <title>About — AGGREGAT</title>
 <style>
   :root{
-    --ink:#E9E9EA; --muted:#B6B7BA; --page:#15171A; --surface:#1B1D21; --line:#2A2D33;
-    --pill:#22252A; --pill-active:#EDEEEF; --pill-text:#0F1012;
+    --ink:#1a1b1f; --muted:#5b5f69; --line:#D9DBE1;
+    --pill:#ffffff; --pill-active:#0f1115; --pill-text:#ffffff;
   }
   *{box-sizing:border-box}
   body{
     margin:0; color:var(--ink);
     background:
-      radial-gradient(1100px 800px at 50% -10%, rgba(255,255,255,.06), transparent 60%),
-      radial-gradient(1000px 800px at 85% 120%, rgba(255,255,255,.05), transparent 60%),
-      linear-gradient(180deg,#1A1C20 0%,#14161A 60%,#121318 100%);
-    font-family:Arial, Helvetica, sans-serif; line-height:1.6;
+      radial-gradient(1000px 700px at 55% -8%, rgba(196,208,255,.18), transparent 55%),
+      radial-gradient(900px 600px at 85% 115%, rgba(255,245,255,.20), transparent 60%),
+      linear-gradient(180deg,#F2F4F8 0%, #ECEFF5 60%, #E9EBF2 100%);
+    font-family: Arial, Helvetica, sans-serif; line-height:1.6;
   }
   header{
     position:sticky; top:0; z-index:50;
-    background:rgba(27,29,33,.78); backdrop-filter:blur(8px);
+    background:rgba(247,247,249,.85); backdrop-filter:blur(10px);
     border-bottom:1px solid var(--line);
     padding:14px 22px; display:flex; justify-content:space-between; align-items:center;
   }
@@ -28,17 +28,15 @@
   nav{display:flex; gap:8px}
   nav a{
     text-decoration:none; color:var(--ink); background:var(--pill); border:1px solid var(--line);
-    padding:6px 14px; border-radius:6px; font-weight:600; font-size:.9rem;
-    transition:background .2s,color .2s,border-color .2s;
+    padding:6px 14px; border-radius:6px; font-weight:600; font-size:.9rem; transition:.2s;
   }
   nav a.active, nav a:hover{background:var(--pill-active); color:var(--pill-text); border-color:transparent}
 
   main{width:min(900px,92vw); margin:28px auto 80px}
   h1{margin:0 0 14px; font-size:1.9rem}
   .panel{
-    background:var(--surface); border:1px solid var(--line); border-radius:12px;
-    padding:22px 22px;
-    box-shadow:0 14px 36px rgba(0,0,0,.22);
+    background:#fff; border:1px solid var(--line); border-radius:12px;
+    padding:22px; box-shadow:0 12px 28px rgba(41,45,55,.12);
   }
   .muted{color:var(--muted)}
   .list{margin:14px 0 0; padding-left:18px}
@@ -67,7 +65,14 @@
       2025 marks a new chapter with the debut various artists compilation <strong>RAFT001</strong>, curated by <strong>BXY Santiago</strong> and
       <strong>Christoffer Polizonis</strong>.
     </p>
-     </section>
+    <h3>Residents</h3>
+    <ul class="list">
+      <li>BXY SANTIAGO (Founder)</li>
+      <li>MONTY PARTY</li>
+      <li>NYKTON</li>
+      <li>TINDRA</li>
+    </ul>
+  </section>
 </main>
 </body>
 </html>

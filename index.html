@@ -5,94 +5,71 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>AGGREGAT</title>
 <style>
-  /* ===== Soft-dark theme ===== */
   :root{
-    --ink:#E9E9EA;
-    --muted:#B6B7BA;
-    --page:#15171A;       /* page bg base */
-    --surface:#1B1D21;    /* panels/header */
-    --line:#2A2D33;       /* subtle borders */
-    --pill:#22252A;       /* default tab bg */
-    --pill-active:#EDEEEF;
-    --pill-text:#0F1012;
+    --ink:#1a1b1f; --line:#D9DBE1;
   }
   *{box-sizing:border-box}
   body{
-    margin:0; color:var(--ink);
+    margin:0;
     background:
-      radial-gradient(1100px 800px at 50% -10%, rgba(255,255,255,.06), transparent 60%),
-      radial-gradient(1000px 800px at 85% 120%, rgba(255,255,255,.05), transparent 60%),
-      linear-gradient(180deg,#1A1C20 0%,#14161A 60%,#121318 100%);
-    font-family:Arial, Helvetica, sans-serif; line-height:1.5;
+      radial-gradient(900px 600px at 70% -10%, rgba(196,208,255,.18), transparent 55%),
+      radial-gradient(900px 700px at 15% 120%, rgba(255,245,255,.20), transparent 60%),
+      linear-gradient(180deg,#F2F4F8 0%, #ECEFF5 60%, #E9EBF2 100%);
+    font-family: Arial, Helvetica, sans-serif;
+    color: var(--ink);
+    min-height: 100svh;
+    display: grid;
+    grid-template-rows: auto 1fr;
   }
 
-  /* header */
   header{
-    position:sticky; top:0; z-index:50;
-    background:rgba(27,29,33,.78);
-    backdrop-filter:blur(8px);
-    border-bottom:1px solid var(--line);
-    padding:14px 22px;
-    display:flex; justify-content:space-between; align-items:center;
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(247,247,249,.85);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
   }
-  .logo{font-weight:700; letter-spacing:.12em}
-  nav{display:flex; gap:8px}
+  .nav{
+    padding: 14px 22px;
+    display: flex; justify-content: space-between; align-items: center;
+    max-width: 1200px; margin: 0 auto;
+  }
+  .logo{ font-weight: 700; letter-spacing: .12em }
+  nav{ display:flex; gap:8px }
   nav a{
     text-decoration:none; color:var(--ink);
-    background:var(--pill); border:1px solid var(--line);
+    background:#fff; border:1px solid var(--line);
     padding:6px 14px; border-radius:6px; font-weight:600; font-size:.9rem;
-    transition:background .2s,color .2s,border-color .2s;
+    transition: .2s;
   }
-  nav a.active, nav a:hover{background:var(--pill-active); color:var(--pill-text); border-color:transparent}
+  nav a.active, nav a:hover{ background:#0f1115; color:#fff; border-color:transparent }
 
-  /* hero */
-  .hero{
-    position:relative; min-height:70vh; display:grid; place-items:center; text-align:center; overflow:hidden;
+  .stage{
+    display: grid; place-items: center;
+    padding: clamp(12px, 3vw, 24px);
   }
-  .hero img{
-    position:absolute; inset:0; width:100%; height:100%; object-fit:cover; filter:grayscale(.05) contrast(.95) brightness(.8);
+  .stage img{
+    max-width: min(92vw, 1200px);
+    max-height: calc(100svh - 90px);
+    object-fit: contain;
+    width: auto; height: auto;
+    box-shadow: 0 10px 24px rgba(41,45,55,.12);
   }
-  .hero::after{
-    /* vignette */
-    content:""; position:absolute; inset:0;
-    background:
-      radial-gradient(900px 500px at 50% 30%, rgba(255,255,255,.05), transparent 60%),
-      linear-gradient(180deg,rgba(0,0,0,.18),rgba(0,0,0,.36));
-  }
-  .hero-content{position:relative; z-index:1; padding:4rem 1rem}
-  .brand{font-size:clamp(38px,8vw,96px); letter-spacing:.25em; margin:0 0 .6rem}
-  .tag{color:var(--muted)}
-  .cta{margin-top:1.1rem; display:flex; gap:.6rem; justify-content:center}
-  .btn{
-    display:inline-block; padding:.55rem 1.1rem; border-radius:6px;
-    background:var(--pill-active); color:var(--pill-text); text-decoration:none; font-weight:700;
-  }
-  .btn.ghost{background:var(--pill); color:var(--ink); border:1px solid var(--line)}
 </style>
 </head>
 <body>
-<header>
-  <div class="logo">AGGREGAT</div>
-  <nav>
-    <a href="index.html" class="active">Home</a>
-    <a href="releases.html">Releases</a>
-    <a href="about.html">About</a>
-  </nav>
-</header>
-
-<main>
-  <section class="hero">
-    <!-- Use your existing landing image -->
-    <img src="assets/landing-bg.jpg" alt="">
-    <div class="hero-content">
-      <h1 class="brand">AGGREGAT</h1>
-      <div class="tag">Events • Label • Mixseries *</div>
-      <div class="cta">
-        <a class="btn" href="releases.html">Latest release</a>
-        <a class="btn ghost" href="https://instagram.com" target="_blank" rel="noopener">IG</a>
-      </div>
+  <header>
+    <div class="nav">
+      <div class="logo">AGGREGAT</div>
+      <nav>
+        <a href="index.html" class="active">Home</a>
+        <a href="releases.html">Releases</a>
+        <a href="about.html">About</a>
+      </nav>
     </div>
-  </section>
-</main>
+  </header>
+
+  <main class="stage">
+    <img src="assets/hero-aggregat.jpg" alt="AGGREGAT hero artwork">
+  </main>
 </body>
 </html>

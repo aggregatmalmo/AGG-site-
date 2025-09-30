@@ -4,50 +4,44 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>About — AGGREGAT</title>
-  <meta name="description" content="About Aggregat — Malmö-based underground platform for events, label releases, and mix archives." />
+  <meta name="description" content="About Aggregat — Malmö-based underground platform." />
   <link rel="icon" href="assets/favicon.ico" />
   <style>
     :root{ --bg:#fafafa; --paper:#fff; --ink:#111; --muted:#6b6b6b; --line:#e9e9e9; }
     *{box-sizing:border-box}
     body{margin:0;background:var(--bg);color:var(--ink);font-family:Arial,Helvetica,sans-serif;line-height:1.55}
     a{color:inherit;text-decoration:none}
-    .container{width:min(1080px,92vw);margin:0 auto}
+    .wrap{width:min(1080px,92vw);margin:0 auto}
 
-    /* Header */
     header{position:sticky;top:0;z-index:10;background:rgba(255,255,255,.85);
       backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
     .nav{display:flex;justify-content:space-between;align-items:center;padding:14px 0}
     .brand{font-weight:600;letter-spacing:.12em;text-transform:uppercase}
     .links{display:flex;gap:.6rem;align-items:center}
     .chip{display:inline-flex;align-items:center;border:1px solid var(--line);border-radius:999px;
-      padding:.28rem .7rem;font-size:.8rem;background:var(--paper)}
+      padding:.28rem .7rem;font-size:.8rem;background:#fff}
     .chip.active{background:#111;color:#fff;border-color:#111}
 
-    /* Page */
     main{padding:7vh 0}
-    h1{font-size:2rem;margin:0 0 1.2rem;text-transform:uppercase;letter-spacing:.08em}
-    h2{margin:2.4rem 0 0.8rem;font-size:1rem;color:var(--muted);letter-spacing:.12em;text-transform:uppercase}
+    h1{font-size:1.6rem;margin:0 0 1.2rem;text-transform:uppercase;letter-spacing:.08em}
+    h2{margin:2.4rem 0 .8rem;font-size:1rem;color:var(--muted);letter-spacing:.12em;text-transform:uppercase}
     p{margin:1rem 0}
-    .lead{font-size:1.05rem}
     .grid{display:grid;grid-template-columns:1fr;gap:24px}
     .card{background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:18px}
     ul{list-style:none;margin:0;padding:0}
     li{padding:.35rem 0;font-weight:600}
 
-    /* Footer */
-    footer{border-top:1px solid var(--line);padding:5vh 0 7vh;color:var(--muted)}
-    footer .row{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+    footer{border-top:1px solid var(--line);padding:5vh 0;color:var(--muted);text-align:center}
   </style>
 </head>
 <body>
-  <!-- Header -->
   <header>
-    <div class="container nav">
+    <div class="wrap nav">
       <div class="brand">AGGREGAT</div>
       <nav class="links" aria-label="primary">
-        <a class="chip" href="index.html">Home</a>
+        <a class="chip" href="./">Home</a>
         <a class="chip" href="releases.html">Releases</a>
-        <a class="chip active" href="about.html">About</a>
+        <a class="chip" href="about.html">About</a>
         <a class="chip" href="https://instagram.com/aggregat040" target="_blank" rel="noopener">IG</a>
         <a class="chip" href="#" target="_blank" rel="noopener">SC</a>
         <a class="chip" href="#" target="_blank" rel="noopener">FB</a>
@@ -55,65 +49,51 @@
     </div>
   </header>
 
-  <!-- Content -->
-  <main>
-    <div class="container">
-      <h1>About</h1>
+  <main class="wrap">
+    <h1>About</h1>
 
-      <div class="grid">
-        <section class="card">
-          <p class="lead">
-            <strong>AGGREGAT</strong> is a Malmö-based underground platform focused on
-            <strong>events, label releases, and mix archives</strong>.
-          </p>
-          <p>
-            Originally founded by <strong>BXY Santiago</strong> together with friends, Aggregat has evolved into a curated system
-            of open airs, club nights, and cross-disciplinary events exploring raw sound, visual identity, and uncompromising
-            energy. Over the last couple of years, the platform has been <strong>led by BXY</strong>, working with a fluid network
-            of artists and collaborators.
-          </p>
-          <p>
-            Aggregat has partnered with clubs, collectives, and cultural institutions across Malmö — developing an independent
-            voice rooted in DIY ethics, inclusivity, and underground pressure.
-          </p>
-          <p>
-            In 2025, Aggregat expands into label territory with the release of its first various artists compilation,
-            <strong>RAFT001</strong>, curated by <strong>BXY Santiago and Christoffer Pollizoni</strong>.
-          </p>
-          <p><strong>Events. Label. Mixseries. No ceilings. Just pressure.</strong></p>
-        </section>
+    <div class="grid">
+      <section class="card">
+        <p><strong>AGGREGAT</strong> is a Malmö-based underground platform focused on <strong>events, label releases, and mix archives</strong>.</p>
+        <p>Originally founded by <strong>BXY Santiago</strong> together with friends, Aggregat has evolved into a curated system of open airs, club nights, and cross-disciplinary events exploring raw sound, visual identity, and uncompromising energy. Over the last couple of years, the platform has been <strong>led by BXY</strong>, working with a fluid network of artists and collaborators.</p>
+        <p>Aggregat has partnered with clubs, collectives, and cultural institutions across Malmö — developing an independent voice rooted in DIY ethics, inclusivity, and underground pressure.</p>
+        <p>In 2025, Aggregat expands into label territory with the release of its first various artists compilation, <strong>RAFT001</strong>, curated by <strong>BXY Santiago and Christoffer Pollizoni</strong>.</p>
+        <p><strong>Events. Label. Mixseries. No ceilings. Just pressure.</strong></p>
+      </section>
 
-        <section class="card">
-          <h2>Residents</h2>
-          <ul>
-            <li>BXY SANTIAGO (founder)</li>
-            <li>MONTY PARTY</li>
-            <li>NYKTON</li>
-            <li>TINDRA</li>
-          </ul>
-        </section>
+      <section class="card">
+        <h2>Residents</h2>
+        <ul>
+          <li>BXY SANTIAGO (founder)</li>
+          <li>MONTY PARTY</li>
+          <li>NYKTON</li>
+          <li>TINDRA</li>
+        </ul>
+      </section>
 
-        <section class="card">
-          <h2>Contact</h2>
-          <p>Email: <a href="mailto:hello@aggregat040.com">hello@aggregat040.com</a></p>
-          <p>Instagram: <a href="https://instagram.com/aggregat040" target="_blank" rel="noopener">@aggregat040</a></p>
-        </section>
-      </div>
+      <section class="card">
+        <h2>Contact</h2>
+        <p>Email: <a href="mailto:hello@aggregat040.com">hello@aggregat040.com</a></p>
+        <p>Instagram: <a href="https://instagram.com/aggregat040" target="_blank" rel="noopener">@aggregat040</a></p>
+      </section>
     </div>
   </main>
 
-  <!-- Footer -->
   <footer>
-    <div class="container row">
-      <div>© <span id="year"></span> AGGREGAT</div>
-      <div class="links">
-        <a class="chip" href="https://instagram.com/aggregat040" target="_blank" rel="noopener">Instagram</a>
-        <a class="chip" href="#" target="_blank" rel="noopener">SoundCloud</a>
-        <a class="chip" href="#" target="_blank" rel="noopener">Facebook</a>
-      </div>
-    </div>
+    © <span id="year"></span> AGGREGAT
   </footer>
 
-  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    (function(){
+      const path = (location.pathname.split('/').pop() || 'index.html');
+      document.querySelectorAll('nav.links a.chip').forEach(a=>{
+        const href = a.getAttribute('href');
+        const isHome = href === './' && (path === '' || path === 'index.html');
+        const isMatch = href.endsWith(path);
+        if (isHome || isMatch) a.classList.add('active'); else a.classList.remove('active');
+      });
+    })();
+  </script>
 </body>
 </html>

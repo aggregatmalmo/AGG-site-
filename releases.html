@@ -11,24 +11,22 @@
     *{box-sizing:border-box}
     body{margin:0;background:var(--bg);color:var(--ink);font-family:Arial,Helvetica,sans-serif;line-height:1.5}
     a{color:inherit;text-decoration:none}
+    .wrap{width:min(1080px,92vw);margin:0 auto}
 
-    /* Header */
     header{position:sticky;top:0;z-index:10;background:rgba(255,255,255,.85);
       backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
-    .nav{display:flex;justify-content:space-between;align-items:center;padding:14px 0;width:min(1080px,92vw);margin:0 auto}
+    .nav{display:flex;justify-content:space-between;align-items:center;padding:14px 0}
     .brand{font-weight:600;letter-spacing:.12em;text-transform:uppercase}
     .links{display:flex;gap:.6rem;align-items:center}
     .chip{display:inline-flex;align-items:center;border:1px solid var(--line);border-radius:999px;
       padding:.28rem .7rem;font-size:.8rem;background:#fff}
     .chip.active{background:#111;color:#fff;border-color:#111}
 
-    /* Page head */
-    .head{width:min(1080px,92vw);margin:0 auto;padding:6vh 0 2vh;border-bottom:1px solid var(--line)}
+    .head{padding:6vh 0 2vh;border-bottom:1px solid var(--line)}
     .head h1{margin:0;font-size:1.6rem;letter-spacing:.08em;text-transform:uppercase}
     .head p{margin:.6rem 0 0;color:var(--muted);font-size:.95rem}
 
-    /* Grid of releases */
-    main{width:min(1080px,92vw);margin:0 auto;padding:4vh 0 8vh}
+    main{padding:4vh 0 8vh}
     .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
     @media (max-width:980px){ .grid{grid-template-columns:repeat(2,1fr);} }
     @media (max-width:640px){ .grid{grid-template-columns:1fr;} }
@@ -41,19 +39,16 @@
     .title{font-weight:700}
     .meta{color:var(--muted);font-size:.92rem;margin-top:.15rem}
 
-    /* Footer */
-    footer{border-top:1px solid var(--line);padding:5vh 0;color:var(--muted)}
-    footer .row{width:min(1080px,92vw);margin:0 auto;display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+    footer{border-top:1px solid var(--line);padding:5vh 0;color:var(--muted);text-align:center}
   </style>
 </head>
 <body>
-  <!-- Header -->
   <header>
-    <div class="nav">
+    <div class="wrap nav">
       <div class="brand">AGGREGAT</div>
       <nav class="links" aria-label="primary">
-        <a class="chip" href="index.html">Home</a>
-        <a class="chip active" href="releases.html">Releases</a>
+        <a class="chip" href="./">Home</a>
+        <a class="chip" href="releases.html">Releases</a>
         <a class="chip" href="about.html">About</a>
         <a class="chip" href="https://instagram.com/aggregat040" target="_blank" rel="noopener">IG</a>
         <a class="chip" href="#" target="_blank" rel="noopener">SC</a>
@@ -62,61 +57,54 @@
     </div>
   </header>
 
-  <!-- Page head -->
-  <div class="head">
+  <div class="wrap head">
     <h1>Releases</h1>
     <p>Vinyl & digital from Aggregat Records.</p>
   </div>
 
-  <!-- Grid -->
-  <main>
+  <main class="wrap">
     <div class="grid">
       <!-- RAFT001 -->
       <a class="release" href="#" target="_blank" rel="noopener">
         <div class="cover">
-          <img src="assets/raft001.jpg" alt="VA — RAFT001 (Aggregat Records)">
+          <img src="assets/raft001.jpg?v=2" alt="VA — RAFT001 (Aggregat Records)">
         </div>
         <div class="caption">
           <div class="title">VA — RAFT001</div>
-          <div class="meta">12\" / Digital · March 2026 · Bandcamp</div>
+          <div class="meta">12" / Digital · March 2026 · Bandcamp</div>
         </div>
       </a>
 
-      <!-- Example placeholders (duplicate and replace when you add more) -->
+      <!-- Add more releases by duplicating this block -->
+      <!--
       <a class="release" href="#" target="_blank" rel="noopener">
         <div class="cover">
-          <img src="assets/release-single.jpg" alt="Artist — Single Title">
+          <img src="assets/your-next-release.jpg" alt="Artist — Title">
         </div>
         <div class="caption">
-          <div class="title">Artist — Single Title</div>
-          <div class="meta">Digital · 2026</div>
+          <div class="title">Artist — Title</div>
+          <div class="meta">Format · Year</div>
         </div>
       </a>
-
-      <a class="release" href="#" target="_blank" rel="noopener">
-        <div class="cover">
-          <img src="assets/release-aggregated.jpg" alt="Aggregated — Compilation">
-        </div>
-        <div class="caption">
-          <div class="title">Aggregated — Compilation</div>
-          <div class="meta">12\" / Digital · 2026</div>
-        </div>
-      </a>
+      -->
     </div>
   </main>
 
-  <!-- Footer -->
   <footer>
-    <div class="row">
-      <div>© <span id="year"></span> AGGREGAT</div>
-      <div class="links">
-        <a class="chip" href="https://instagram.com/aggregat040" target="_blank">Instagram</a>
-        <a class="chip" href="#" target="_blank">SoundCloud</a>
-        <a class="chip" href="#" target="_blank">Facebook</a>
-      </div>
-    </div>
+    © <span id="year"></span> AGGREGAT
   </footer>
 
-  <script>document.getElementById('year').textContent=new Date().getFullYear();</script>
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    (function(){
+      const path = (location.pathname.split('/').pop() || 'index.html');
+      document.querySelectorAll('nav.links a.chip').forEach(a=>{
+        const href = a.getAttribute('href');
+        const isHome = href === './' && (path === '' || path === 'index.html');
+        const isMatch = href.endsWith(path);
+        if (isHome || isMatch) a.classList.add('active'); else a.classList.remove('active');
+      });
+    })();
+  </script>
 </body>
 </html>

@@ -23,21 +23,9 @@
   html,body{margin:0; overflow-x:hidden}
 
   /* Arian LT */
-  @font-face{
-    font-family:'Arian LT';
-    src:url('assets/fonts/Arian LT Light.ttf') format('truetype');
-    font-weight:300; font-style:normal; font-display:swap;
-  }
-  @font-face{
-    font-family:'Arian LT';
-    src:url('assets/fonts/Arian LT Demi.ttf') format('truetype');
-    font-weight:600; font-style:normal; font-display:swap;
-  }
-  @font-face{
-    font-family:'Arian LT';
-    src:url('assets/fonts/Arian LT Bold.ttf') format('truetype');
-    font-weight:700; font-style:normal; font-display:swap;
-  }
+  @font-face{font-family:'Arian LT';src:url('assets/fonts/Arian LT Light.ttf') format('truetype');font-weight:300;font-style:normal;font-display:swap}
+  @font-face{font-family:'Arian LT';src:url('assets/fonts/Arian LT Demi.ttf') format('truetype');font-weight:600;font-style:normal;font-display:swap}
+  @font-face{font-family:'Arian LT';src:url('assets/fonts/Arian LT Bold.ttf') format('truetype');font-weight:700;font-style:normal;font-display:swap}
 
   body{
     font-family:'Arian LT', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
@@ -130,7 +118,7 @@
   @media (max-width:900px){ .arrow{height:108px} }
   @media (max-width:640px){ .arrow{display:none} nav a{padding:5px 10px} }
 
-  /* Footer with right-side credit */
+  /* Footer with lighter credit name */
   footer{
     border-top:1px solid var(--line);
     background:rgba(255,255,255,.82);
@@ -141,7 +129,7 @@
     max-width:1300px; margin:0 auto; padding:14px 22px; color:var(--muted); font-size:.92rem;
     display:flex; align-items:center; justify-content:space-between; gap:12px;
   }
-  .credit{white-space:nowrap}
+  .credit strong{color:var(--muted); font-weight:600}
 </style>
 </head>
 <body>
@@ -286,3 +274,4 @@
 </script>
 </body>
 </html>
+

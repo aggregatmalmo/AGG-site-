@@ -1,99 +1,98 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
+<meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>AGGREGAT</title>
 
-<!-- Google Font close in feel to the reference -->
+<!-- Clean, minimal sans similar to the reference -->
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
   :root{
-    /* light, slightly-grey canvas */
-    --bg:#f3f4f6;          /* page */
-    --ink:#1b1c20;         /* primary text */
-    --muted:#6b6f78;       /* secondary */
-    --line:#e3e5ea;        /* hairline */
-    --accent:#111;         /* underline/hover */
-    --hdr-bg:rgba(255,255,255,.82);
+    /* soft, slightly grey canvas */
+    --bg:#efeff1;
+    --ink:#121317;
+    --muted:#6d7078;
+    --line:#e1e3e8;
+    --underline:#111;
   }
 
   *{box-sizing:border-box}
   html,body{height:100%}
   body{
-    margin:0; font-family:Montserrat, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-    color:var(--ink); background:
-      radial-gradient(900px 600px at 70% -10%, rgba(182,190,255,.10), transparent 55%),
-      radial-gradient(900px 700px at 15% 120%, rgba(255,245,255,.12), transparent 60%),
+    margin:0;
+    background:
+      radial-gradient(1000px 700px at 60% -10%, rgba(180,188,255,.12), transparent 55%),
+      radial-gradient(900px 650px at 15% 120%, rgba(255,245,255,.14), transparent 60%),
       var(--bg);
+    color:var(--ink);
+    font-family:Montserrat, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
     display:grid; grid-template-rows:auto 1fr auto;
   }
 
-  /* Header */
+  /* ===== Header (like TRANSITION) ===== */
   header{
     position:sticky; top:0; z-index:20;
-    background:var(--hdr-bg);
+    background:rgba(255,255,255,.85);
     backdrop-filter:blur(8px);
     border-bottom:1px solid var(--line);
   }
-  .bar{
-    max-width:1200px; margin:0 auto; padding:14px 22px;
-    display:flex; align-items:center; justify-content:space-between;
-    gap:16px;
+  .header-inner{
+    max-width:1300px; margin:0 auto; padding:14px 22px;
+    display:grid; grid-template-columns:1fr auto 1fr; align-items:center;
   }
 
-  /* Left nav (text links with underline on hover/active) */
+  /* left nav */
   .mainnav{
     display:flex; gap:22px; align-items:center;
-    font-weight:600; letter-spacing:.03em;
+    font-weight:600; letter-spacing:.02em;
   }
   .mainnav a{
-    position:relative; text-decoration:none; color:var(--ink);
-    padding:6px 0;
+    color:var(--ink); text-decoration:none; padding:6px 0; position:relative;
   }
   .mainnav a::after{
     content:""; position:absolute; left:0; right:0; bottom:-6px; height:2px;
-    background:var(--accent); transform:scaleX(0); transform-origin:left; transition:transform .2s ease;
+    background:var(--underline); transform:scaleX(0); transform-origin:left; transition:transform .22s ease;
   }
-  .mainnav a:hover::after,
-  .mainnav a.active::after{ transform:scaleX(1); }
+  .mainnav a:hover::after, .mainnav a.active::after{ transform:scaleX(1); }
 
-  /* Right social icons */
-  .social{display:flex; gap:14px; align-items:center;}
+  /* centered site title */
+  .brand{
+    font-weight:800; letter-spacing:.16em; text-transform:uppercase;
+    line-height:1; text-align:center; font-size:clamp(22px,2.4vw,28px);
+  }
+
+  /* right social icons */
+  .social{ justify-self:end; display:flex; gap:16px; align-items:center; }
   .social a{ color:var(--ink); opacity:.9; transition:opacity .2s ease; }
   .social a:hover{ opacity:1; }
   .social svg{ width:20px; height:20px; display:block; }
 
-  /* Stage: only the image, centered & zoomed to cover */
+  /* ===== Main hero image only ===== */
   .stage{
     display:grid; place-items:center;
-    padding: clamp(10px, 2.5vw, 22px);
+    padding: clamp(14px, 3vw, 24px);
   }
   .hero{
     width:100%; max-width:1400px;
-    aspect-ratio: 16 / 9;               /* keeps a cinematic crop on wide screens */
+    aspect-ratio: 16 / 9; /* wide crop like the ref site */
     background:url("assets/hero-aggregat.jpg") center center / cover no-repeat;
     border:1px solid var(--line);
-    box-shadow: 0 12px 28px rgba(27,28,32,.12);
+    box-shadow:0 14px 34px rgba(18,19,23,.12);
+  }
+  @media (max-width:640px){
+    .hero{ aspect-ratio: 4 / 5; } /* taller crop on phones */
   }
 
-  /* Footer */
+  /* ===== Footer ===== */
   footer{
     border-top:1px solid var(--line);
-    background:rgba(255,255,255,.7);
+    background:rgba(255,255,255,.8);
   }
   .foot{
-    max-width:1200px; margin:0 auto; padding:14px 22px;
-    display:flex; align-items:center; justify-content:space-between; gap:14px;
-    color:var(--muted); font-size:.9rem;
-  }
-
-  /* Small screens */
-  @media (max-width:640px){
-    .mainnav{ gap:16px; }
-    .stage{ padding:12px; }
-    .hero{ aspect-ratio: 4 / 5; } /* taller crop on phones */
+    max-width:1300px; margin:0 auto; padding:14px 22px;
+    color:var(--muted); font-size:.92rem;
   }
 </style>
 </head>
@@ -101,49 +100,48 @@
 
   <!-- HEADER -->
   <header>
-    <div class="bar">
+    <div class="header-inner">
+      <!-- left: nav -->
       <nav class="mainnav" aria-label="Primary">
-        <a href="index.html" class="active">Home</a>
+        <a class="active" href="index.html">Home</a>
         <a href="releases.html">Releases</a>
         <a href="about.html">About</a>
       </nav>
 
+      <!-- center: site title -->
+      <div class="brand">AGGREGAT</div>
+
+      <!-- right: socials -->
       <div class="social" aria-label="Social">
         <!-- Instagram -->
         <a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
             <rect x="3" y="3" width="18" height="18" rx="4"></rect>
-            <path d="M16 11.37a4 4 0 1 1-7.999.001A4 4 0 0 1 16 11.37z"></path>
-            <line x1="17.5" y1="6.5" x2="17.5" y2="6.5"></line>
+            <circle cx="12" cy="12" r="4.2"></circle>
+            <circle cx="17.5" cy="6.5" r="0.8" fill="currentColor" stroke="none"></circle>
           </svg>
         </a>
         <!-- SoundCloud -->
         <a href="https://soundcloud.com" target="_blank" rel="noopener" aria-label="SoundCloud">
-          <svg viewBox="0 0 24 24" fill="currentColor">
-            <path d="M18.5 10.5c-1.1 0-2 .9-2 2v2.5h4.2c1.5 0 2.8-1.2 2.8-2.7 0-1.5-1.2-2.8-2.7-2.8-.1 0-.2 0-.3 0-.5-2.1-2.4-3.7-4.6-3.7-1 0-1.9.3-2.7.8v8.4H6v-6.2c-1.2.7-2 2-2 3.5 0 2.2 1.8 4 4 4h10.5c2.5 0 4.5-2 4.5-4.5s-2-4.3-4.5-4.3z"/>
-          </svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.5 10.5c-1.1 0-2 .9-2 2v2.5h4.2c1.5 0 2.8-1.2 2.8-2.7 0-1.5-1.2-2.8-2.7-2.8-.1 0-.2 0-.3 0-.5-2.1-2.4-3.7-4.6-3.7-1 0-1.9.3-2.7.8v8.4H6v-6.2c-1.2.7-2 2-2 3.5 0 2.2 1.8 4 4 4h10.5c2.5 0 4.5-2 4.5-4.5s-2-4.3-4.5-4.3z"/></svg>
         </a>
         <!-- Facebook -->
         <a href="https://facebook.com" target="_blank" rel="noopener" aria-label="Facebook">
-          <svg viewBox="0 0 24 24" fill="currentColor">
-            <path d="M13.5 9H15V6h-1.5C11.6 6 10 7.6 10 9.5V11H8v3h2v7h3v-7h2.1l.4-3H13v-1.5c0-.3.2-.5.5-.5z"/>
-          </svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 9H15V6h-1.5C11.6 6 10 7.6 10 9.5V11H8v3h2v7h3v-7h2.1l.4-3H13v-1.5c0-.3.2-.5.5-.5z"/></svg>
         </a>
       </div>
     </div>
   </header>
 
-  <!-- MAIN (hero only) -->
+  <!-- MAIN -->
   <main class="stage">
+    <!-- Just the hero image -->
     <div class="hero" role="img" aria-label="AGGREGAT hero artwork"></div>
   </main>
 
   <!-- FOOTER -->
   <footer>
-    <div class="foot">
-      <span>© AGGREGAT — All rights reserved</span>
-      <span class="muted">Malmö, Sweden</span>
-    </div>
+    <div class="foot">© AGGREGAT</div>
   </footer>
 
 </body>

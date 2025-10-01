@@ -4,6 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>About — AGGREGAT</title>
+<meta name="description" content="About AGGREGAT — Malmö-based underground platform for events, releases, and mixes." />
 <style>
   :root{
     --ink:#1a1b1f; --muted:#5b5f69; --line:#D9DBE1;
@@ -20,7 +21,7 @@
   }
   header{
     position:sticky; top:0; z-index:50;
-    background:rgba(247,247,249,.85); backdrop-filter:blur(10px);
+    background:rgba(247,247,249,.85); -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px);
     border-bottom:1px solid var(--line);
     padding:14px 22px; display:flex; justify-content:space-between; align-items:center;
   }
@@ -30,7 +31,7 @@
     text-decoration:none; color:var(--ink); background:var(--pill); border:1px solid var(--line);
     padding:6px 14px; border-radius:6px; font-weight:600; font-size:.9rem; transition:.2s;
   }
-  nav a.active, nav a:hover{background:var(--pill-active); color:var(--pill-text); border-color:transparent}
+  nav a[aria-current="page"], nav a:hover{background:var(--pill-active); color:var(--pill-text); border-color:transparent}
 
   main{width:min(900px,92vw); margin:28px auto 80px}
   h1{margin:0 0 14px; font-size:1.9rem}
@@ -38,6 +39,7 @@
     background:#fff; border:1px solid var(--line); border-radius:12px;
     padding:22px; box-shadow:0 12px 28px rgba(41,45,55,.12);
   }
+  .panel p{margin:0 0 12px}
   .muted{color:var(--muted)}
   .list{margin:14px 0 0; padding-left:18px}
 </style>
@@ -45,10 +47,10 @@
 <body>
 <header>
   <div class="logo">AGGREGAT</div>
-  <nav>
+  <nav aria-label="Primary">
     <a href="index.html">Home</a>
     <a href="releases.html">Releases</a>
-    <a href="about.html" class="active">About</a>
+    <a href="about.html" aria-current="page">About</a>
   </nav>
 </header>
 
@@ -57,8 +59,8 @@
   <section class="panel">
     <p><strong>AGGREGAT</strong> is a Malmö-based underground platform focused on <strong>events, label releases, and mix archives</strong>.</p>
     <p class="muted">
-      Originally founded by <strong>BXY Santiago</strong> together with friends, Aggregat has evolved into a curated system of open airs, club nights,
-      and cross-disciplinary events exploring raw sound, visual identity, and uncompromising energy. In recent years, the platform has been led by BXY,
+      Founded by <strong>BXY Santiago</strong> together with friends, Aggregat has evolved into a curated system of open airs, club nights,
+      and cross-disciplinary events exploring raw sound, visual identity, and uncompromising energy. In recent years the platform has been led by BXY,
       working with a fluid network of artists and collaborators. Rooted in DIY ethics and inclusivity, Aggregat develops an independent voice across Malmö.
     </p>
     <p>
@@ -76,3 +78,4 @@
 </main>
 </body>
 </html>
+

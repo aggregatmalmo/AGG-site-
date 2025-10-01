@@ -134,4 +134,82 @@
           <div class="sleeve"><img src="assets/speedbump-vol2.jpg" alt="AGG003 cover: Speed Bump Vol. 2"></div>
           <div class="meta">
             <div class="cat">AGG003</div>
-            <div class="artist">Variou
+            <div class="artist">Various Artists</div>
+            <div class="title">Speed Bump Vol. 2</div>
+            <a class="btn" href="#" target="_blank" rel="noopener">Bandcamp</a>
+          </div>
+        </article>
+        <article class="slide">
+          <div class="sleeve"><img src="assets/t001.jpg" alt="AGG004 cover: [T001]"></div>
+          <div class="meta">
+            <div class="cat">AGG004</div>
+            <div class="artist">Various Artists</div>
+            <div class="title">[T001]</div>
+            <a class="btn" href="#" target="_blank" rel="noopener">Bandcamp</a>
+          </div>
+        </article>
+      </div>
+    </div>
+    <button class="arrow right" id="nextBtn" aria-label="Next release">›</button>
+  </section>
+</main>
+
+<script>
+  const viewport = document.getElementById('viewport');
+  const track = document.getElementById('track');
+  const prev = document.getElementById('prevBtn');
+  const next = document.getElementById('nextBtn');
+
+  const originals = Array.from(track.children);
+  const COUNT = originals.length;
+
+  function clone(where){
+    const clones = originals.map(el => {
+      const c = el.cloneNode(true);
+      c.classList.add('is-clone');
+      return c;
+    });
+    if(where==='before') clones.reverse().forEach(c=>track.insertBefore(c, track.firstChild));
+    else clones.forEach(c=>track.appendChild(c));
+  }
+  clone('before'); clone('after');
+
+  let slides = Array.from(track.children);
+  let current = COUNT;
+
+  function centerOffset(i){
+    const item = slides[i];
+    const left = item.offsetLeft;
+    const w = item.offsetWidth;
+    const center = left + w/2;
+    return viewport.clientWidth/2 - center;
+  }
+  function apply(immediate=false){
+    const x = centerOffset(current);
+    track.style.transition = immediate ? 'none' : 'transform .5s ease';
+    track.style.transform = `translate3d(${x}px,0,0)`;
+    slides.forEach((s, idx)=> s.classList.toggle('active', idx===current));
+    if(immediate) requestAnimationFrame(()=>track.style.transition='transform .5s ease');
+  }
+  function normalize(){
+    if(current >= COUNT*2){ current -= COUNT; apply(true); }
+    else if(current < COUNT){ current += COUNT; apply(true); }
+  }
+  function go(dir){
+    current += dir;
+    apply(false);
+    clearTimeout(go._t); go._t = setTimeout(normalize, 520);
+  }
+  next.addEventListener('click', ()=>go(1));
+  prev.addEventListener('click', ()=>go(-1));
+  window.addEventListener('keydown', (e)=>{
+    if(e.key==='ArrowRight') go(1);
+    if(e.key==='ArrowLeft')  go(-1);
+  }, { passive: true });
+
+  apply(true);
+  addEventListener('resize', ()=>apply(true), { passive: true });
+</script>
+</body>
+</html>
+

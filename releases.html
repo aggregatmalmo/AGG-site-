@@ -4,6 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Releases — AGGREGAT</title>
+<meta name="description" content="AGGREGAT releases — compilations and EPs." />
 <style>
   :root{
     --ink:#1a1b1f; --muted:#5b5f69; --line:#D9DBE1;
@@ -25,7 +26,7 @@
   }
   header{
     position:sticky; top:0; z-index:50;
-    background:rgba(247,247,249,.85); backdrop-filter:blur(10px);
+    background:rgba(247,247,249,.85); -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px);
     border-bottom:1px solid var(--line);
     padding:14px 22px; display:flex; justify-content:space-between; align-items:center;
   }
@@ -35,7 +36,7 @@
     text-decoration:none; color:var(--ink); background:var(--pill); border:1px solid var(--line);
     padding:6px 14px; border-radius:6px; font-weight:600; font-size:.9rem; transition:.2s;
   }
-  nav a.active, nav a:hover{background:var(--pill-active); color:var(--pill-text); border-color:transparent}
+  nav a[aria-current="page"], nav a:hover{background:var(--pill-active); color:var(--pill-text); border-color:transparent}
 
   h1{margin:18px 0 6px; text-align:center; font-size:1.85rem}
 
@@ -56,7 +57,7 @@
     box-shadow:0 10px 28px rgba(41,45,55,.12), 0 4px 12px rgba(41,45,55,.10);
   }
   .sleeve img{display:block; width:100%; height:auto}
-  .slide:not(.active){ transform:scale(var(--sideScale)); opacity:var(--sideOpacity); }
+  .slide:not(.active){ transform:scale(var(--sideScale)); opacity:var(--sideOpacity) }
   .meta{display:none; margin-top:12px; text-align:center}
   .slide.active .meta{display:block}
   .cat{font-weight:700; font-size:.92rem}
@@ -81,7 +82,7 @@
   .arrow.right{right:14px}
 
   @media (max-width:900px){
-    :root{ --gap: 8vw; --slideW: 74vw; --sideScale:.88; --sideOpacity:.82; }
+    :root{ --gap: 8vw; --slideW: 74vw; --sideScale:.88; --sideOpacity:.82 }
     .arrow{height:108px}
   }
   @media (max-width:640px){ .arrow{display:none} nav a{padding:5px 10px} }
@@ -90,116 +91,47 @@
 <body>
 <header>
   <div class="logo">AGGREGAT</div>
-  <nav>
+  <nav aria-label="Primary">
     <a href="index.html">Home</a>
-    <a href="releases.html" class="active">Releases</a>
+    <a href="releases.html" aria-current="page">Releases</a>
     <a href="about.html">About</a>
   </nav>
 </header>
 
 <main>
   <h1>Releases</h1>
-  <section class="carousel" id="carousel">
-    <button class="arrow left" id="prevBtn" aria-label="Previous">‹</button>
+
+  <section
+    class="carousel"
+    id="carousel"
+    role="region"
+    aria-roledescription="carousel"
+    aria-label="AGGREGAT releases"
+    aria-live="polite"
+  >
+    <button class="arrow left" id="prevBtn" aria-label="Previous release">‹</button>
     <div class="viewport" id="viewport">
       <div class="track" id="track">
         <article class="slide">
-          <div class="sleeve"><img src="assets/raft001.jpg" alt="AGG001 cover"></div>
+          <div class="sleeve"><img src="assets/raft001.jpg" alt="AGG001 cover: RAFT001 Compilation"></div>
           <div class="meta">
             <div class="cat">AGG001</div>
             <div class="artist">Various Artists</div>
             <div class="title">RAFT001 Compilation</div>
-            <a class="btn" href="#">Bandcamp</a>
+            <a class="btn" href="#" target="_blank" rel="noopener">Bandcamp</a>
           </div>
         </article>
         <article class="slide">
-          <div class="sleeve"><img src="assets/raddler-express.jpg" alt="AGG002 cover"></div>
+          <div class="sleeve"><img src="assets/raddler-express.jpg" alt="AGG002 cover: Raddler Express — Express EP"></div>
           <div class="meta">
             <div class="cat">AGG002</div>
             <div class="artist">Raddler Express</div>
             <div class="title">Express EP</div>
-            <a class="btn" href="#">Bandcamp</a>
+            <a class="btn" href="#" target="_blank" rel="noopener">Bandcamp</a>
           </div>
         </article>
         <article class="slide">
-          <div class="sleeve"><img src="assets/speedbump-vol2.jpg" alt="AGG003 cover"></div>
+          <div class="sleeve"><img src="assets/speedbump-vol2.jpg" alt="AGG003 cover: Speed Bump Vol. 2"></div>
           <div class="meta">
             <div class="cat">AGG003</div>
-            <div class="artist">Various Artists</div>
-            <div class="title">Speed Bump Vol. 2</div>
-            <a class="btn" href="#">Bandcamp</a>
-          </div>
-        </article>
-        <article class="slide">
-          <div class="sleeve"><img src="assets/t001.jpg" alt="AGG004 cover"></div>
-          <div class="meta">
-            <div class="cat">AGG004</div>
-            <div class="artist">Various Artists</div>
-            <div class="title">[T001]</div>
-            <a class="btn" href="#">Bandcamp</a>
-          </div>
-        </article>
-      </div>
-    </div>
-    <button class="arrow right" id="nextBtn" aria-label="Next">›</button>
-  </section>
-</main>
-
-<script>
-  const viewport = document.getElementById('viewport');
-  const track = document.getElementById('track');
-  const prev = document.getElementById('prevBtn');
-  const next = document.getElementById('nextBtn');
-
-  const originals = Array.from(track.children);
-  const COUNT = originals.length;
-
-  function clone(where){
-    const clones = originals.map(el => {
-      const c = el.cloneNode(true);
-      c.classList.add('is-clone');
-      return c;
-    });
-    if(where==='before') clones.reverse().forEach(c=>track.insertBefore(c, track.firstChild));
-    else clones.forEach(c=>track.appendChild(c));
-  }
-  clone('before'); clone('after');
-
-  let slides = Array.from(track.children);
-  let current = COUNT;
-
-  function centerOffset(i){
-    const item = slides[i];
-    const left = item.offsetLeft;
-    const w = item.offsetWidth;
-    const center = left + w/2;
-    return viewport.clientWidth/2 - center;
-  }
-  function apply(immediate=false){
-    const x = centerOffset(current);
-    track.style.transition = immediate ? 'none' : 'transform .5s ease';
-    track.style.transform = `translate3d(${x}px,0,0)`;
-    slides.forEach((s, idx)=> s.classList.toggle('active', idx===current));
-    if(immediate) requestAnimationFrame(()=>track.style.transition='transform .5s ease');
-  }
-  function normalize(){
-    if(current >= COUNT*2){ current -= COUNT; apply(true); }
-    else if(current < COUNT){ current += COUNT; apply(true); }
-  }
-  function go(dir){
-    current += dir;
-    apply(false);
-    clearTimeout(go._t); go._t = setTimeout(normalize, 520);
-  }
-  next.addEventListener('click', ()=>go(1));
-  prev.addEventListener('click', ()=>go(-1));
-  window.addEventListener('keydown', (e)=>{
-    if(e.key==='ArrowRight') go(1);
-    if(e.key==='ArrowLeft')  go(-1);
-  });
-
-  apply(true);
-  window.addEventListener('resize', ()=>apply(true));
-</script>
-</body>
-</html>
+            <div class="artist">Variou

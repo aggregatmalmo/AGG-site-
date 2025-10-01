@@ -24,21 +24,9 @@
   html,body{margin:0; overflow-x:hidden}
 
   /* Arian LT (local files in assets/fonts/) */
-  @font-face{
-    font-family:'Arian LT';
-    src:url('assets/fonts/Arian LT Light.ttf') format('truetype');
-    font-weight:300; font-style:normal; font-display:swap;
-  }
-  @font-face{
-    font-family:'Arian LT';
-    src:url('assets/fonts/Arian LT Demi.ttf') format('truetype');
-    font-weight:600; font-style:normal; font-display:swap;
-  }
-  @font-face{
-    font-family:'Arian LT';
-    src:url('assets/fonts/Arian LT Bold.ttf') format('truetype');
-    font-weight:700; font-style:normal; font-display:swap;
-  }
+  @font-face{font-family:'Arian LT';src:url('assets/fonts/Arian LT Light.ttf') format('truetype');font-weight:300;font-style:normal;font-display:swap}
+  @font-face{font-family:'Arian LT';src:url('assets/fonts/Arian LT Demi.ttf') format('truetype');font-weight:600;font-style:normal;font-display:swap}
+  @font-face{font-family:'Arian LT';src:url('assets/fonts/Arian LT Bold.ttf') format('truetype');font-weight:700;font-style:normal;font-display:swap}
 
   body{
     font-family:'Arian LT', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
@@ -94,7 +82,7 @@
     background:url("assets/hero-aggregat.jpg") center/cover no-repeat;
   }
 
-  /* Footer with right-side credit */
+  /* Footer with lighter credit name */
   footer{
     border-top:1px solid var(--line);
     background:rgba(255,255,255,.82);
@@ -105,7 +93,7 @@
     max-width:1300px; margin:0 auto; padding:14px 22px; color:var(--muted); font-size:.92rem;
     display:flex; align-items:center; justify-content:space-between; gap:12px;
   }
-  .credit{white-space:nowrap}
+  .credit strong{color:var(--muted); font-weight:600} /* slightly lighter than body text */
 </style>
 </head>
 <body>
@@ -149,7 +137,6 @@
   </footer>
 
 <script>
-  // Measure header so the hero perfectly fills the remaining viewport
   const header = document.getElementById('siteHeader');
   function setHeaderH(){
     const h = header.getBoundingClientRect().height;
@@ -160,3 +147,4 @@
 </script>
 </body>
 </html>
+

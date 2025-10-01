@@ -5,18 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>AGGREGAT</title>
 
-<!-- Header title font close to your artwork -->
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
-
 <style>
   :root{
-    --bg:#efeff1;        /* light grey */
+    --bg:#efeff1;        /* light grey canvas */
     --ink:#121317;       /* text */
     --muted:#6d7078;     /* subtle text */
     --line:#e1e3e8;      /* hairline */
     --underline:#111;    /* link underline */
-    --hdrH:auto;         /* will be set by JS */
-    --ftrH:auto;         /* will be set by JS */
+    --hdrH:auto;         /* set by JS for perfect hero fit */
   }
 
   *{box-sizing:border-box}
@@ -24,28 +20,25 @@
   body{
     margin:0; color:var(--ink);
     background:
-      radial-gradient(900px 650px at 60% -10%, rgba(180,188,255,.10), transparent 55%),
+      radial-gradient(1000px 700px at 60% -10%, rgba(180,188,255,.10), transparent 55%),
       radial-gradient(900px 650px at 15% 120%, rgba(255,245,255,.12), transparent 60%),
       var(--bg);
     font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-    /* allow scroll so wheel direction can toggle header/footer, but the hero itself never scrolls */
-    overflow-y:auto;
   }
 
-  /* ===== Header (nav left, title center, socials right) ===== */
+  /* ===== Header: always visible, see-through ===== */
   header{
     position:sticky; top:0; z-index:20;
-    background:rgba(255,255,255,.85);
+    background:rgba(255,255,255,.78);
     backdrop-filter:blur(8px);
     border-bottom:1px solid var(--line);
-    transition:transform .28s ease;
-    will-change:transform;
   }
-  header.hide{ transform:translateY(-100%); }
   .header-inner{
     max-width:1300px; margin:0 auto; padding:14px 22px;
     display:grid; grid-template-columns:1fr auto 1fr; align-items:center;
   }
+
+  /* Left nav */
   .mainnav{
     display:flex; gap:22px; align-items:center;
     font-weight:600; letter-spacing:.02em;
@@ -59,49 +52,45 @@
   }
   .mainnav a:hover::after, .mainnav a.active::after{ transform:scaleX(1); }
 
+  /* Center title: ARIAN / Helvetica World bold */
   .brand{
-    font-family:'Orbitron', sans-serif; font-weight:700;
-    letter-spacing:.18em; text-transform:uppercase;
-    line-height:1; text-align:center; font-size:clamp(22px,2.6vw,30px);
+    font-family: "Arian", "Helvetica World", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight:700;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    line-height:1; text-align:center;
+    font-size:clamp(22px,2.6vw,30px);
   }
 
+  /* Right socials */
   .social{ justify-self:end; display:flex; gap:16px; align-items:center; }
   .social a{ color:var(--ink); opacity:.9; transition:opacity .2s ease; }
   .social a:hover{ opacity:1; }
   .social svg{ width:20px; height:20px; display:block; }
 
-  /* ===== Stage ===== */
+  /* ===== Main: hero fills viewport minus header; footer is next ===== */
   main{
-    /* hero takes the whole viewport minus header+footer, set via JS */
-    min-height: calc(100svh - var(--hdrH) - var(--ftrH));
-    height: calc(100svh - var(--hdrH) - var(--ftrH));
+    min-height: calc(100svh - var(--hdrH));
+    height: calc(100svh - var(--hdrH));
     display:grid; place-items:center;
   }
 
-  /* Full-bleed, edge-to-edge hero */
+  /* Full-bleed hero (no gutters) */
   .hero{
-    width:100vw;        /* full edge-to-edge */
+    width:100vw;
     height:100%;
     background:url("assets/hero-aggregat.jpg") center center / cover no-repeat;
   }
 
-  /* ===== Footer ===== */
+  /* Footer */
   footer{
-    position:sticky; bottom:0; z-index:20;
     border-top:1px solid var(--line);
-    background:rgba(255,255,255,.85);
+    background:rgba(255,255,255,.82);
     backdrop-filter:blur(6px);
-    transition:transform .28s ease;
-    will-change:transform;
   }
-  footer.hide{ transform:translateY(100%); }
   .foot{
     max-width:1300px; margin:0 auto; padding:14px 22px;
     color:var(--muted); font-size:.92rem;
-  }
-
-  @media (max-width:640px){
-    .hero{ /* taller phone crop automatically from object-fit:cover */ }
   }
 </style>
 </head>
@@ -115,7 +104,9 @@
         <a href="releases.html">Releases</a>
         <a href="about.html">About</a>
       </nav>
+
       <div class="brand">AGGREGAT</div>
+
       <div class="social" aria-label="Social">
         <!-- Instagram -->
         <a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram">
@@ -137,51 +128,25 @@
     </div>
   </header>
 
-  <!-- MAIN (hero only, full-bleed) -->
-  <main id="stage">
+  <!-- MAIN -->
+  <main>
     <div class="hero" role="img" aria-label="AGGREGAT hero artwork"></div>
   </main>
 
   <!-- FOOTER -->
-  <footer id="siteFooter">
+  <footer>
     <div class="foot">© AGGREGAT</div>
   </footer>
 
 <script>
-  // Measure header/footer heights and set CSS vars so the hero fills the rest exactly
+  // measure header height to make hero exactly fill the rest
   const header = document.getElementById('siteHeader');
-  const footer = document.getElementById('siteFooter');
-  function setHeights(){
-    const hdrH = header.getBoundingClientRect().height;
-    const ftrH = footer.getBoundingClientRect().height;
-    document.documentElement.style.setProperty('--hdrH', hdrH + 'px');
-    document.documentElement.style.setProperty('--ftrH', ftrH + 'px');
+  function setHeaderH(){
+    const h = header.getBoundingClientRect().height;
+    document.documentElement.style.setProperty('--hdrH', h + 'px');
   }
-  setHeights();
-  window.addEventListener('resize', setHeights);
-
-  // Hide header when scrolling down, show footer; reverse when scrolling up.
-  let lastY = window.scrollY;
-  function onScroll(){
-    const y = window.scrollY;
-    if (y > lastY + 2){            // scrolling down
-      header.classList.add('hide');
-      footer.classList.remove('hide');
-    } else if (y < lastY - 2){     // scrolling up
-      header.classList.remove('hide');
-      footer.classList.add('hide');
-    }
-    lastY = y;
-  }
-  // Start with footer hidden
-  footer.classList.add('hide');
-  window.addEventListener('scroll', onScroll, {passive:true});
-
-  // Also support wheel direction without needing big scroll distances
-  window.addEventListener('wheel', (e)=>{
-    if (e.deltaY > 0){ header.classList.add('hide'); footer.classList.remove('hide'); }
-    else if (e.deltaY < 0){ header.classList.remove('hide'); footer.classList.add('hide'); }
-  }, {passive:true});
+  setHeaderH();
+  addEventListener('resize', setHeaderH);
 </script>
 </body>
 </html>

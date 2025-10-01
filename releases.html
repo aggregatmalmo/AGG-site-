@@ -49,9 +49,14 @@
     max-width:1300px; margin:0 auto; padding:14px 22px;
     display:grid; grid-template-columns:1fr auto 1fr; align-items:center;
   }
-  nav[aria-label="Primary"]{display:flex; gap:22px; align-items:center; letter-spacing:.02em}
+  nav[aria-label="Primary"]{
+    display:flex; gap:22px; align-items:center; letter-spacing:.02em;
+    overflow-x:auto; -webkit-overflow-scrolling:touch; scrollbar-width:none;
+  }
+  nav[aria-label="Primary"]::-webkit-scrollbar{display:none}
   nav[aria-label="Primary"] a{
     color:var(--ink); text-decoration:none; padding:6px 0; position:relative; font-weight:600;
+    white-space:nowrap;
   }
   nav[aria-label="Primary"] a::after{
     content:""; position:absolute; left:0; right:0; bottom:-6px; height:2px;
@@ -75,7 +80,7 @@
   main{max-width:1200px; margin:18px auto 56px; padding:0 22px}
   h1{margin:18px 0 18px; font-size:1.85rem; text-align:center; font-weight:700}
 
-  .carousel{position:relative; overflow:hidden}
+  .carousel{position:relative; overflow:hidden; touch-action:pan-y;}
   .viewport{position:relative; width:100%}
   .track{
     display:flex; align-items:center; gap:7vw;
@@ -115,8 +120,6 @@
   .arrow:hover{background:rgba(15,17,21,.26)}
   .arrow.left{left:14px}
   .arrow.right{right:14px}
-  @media (max-width:900px){ .arrow{height:108px} }
-  @media (max-width:640px){ .arrow{display:none} nav a{padding:5px 10px} }
 
   /* Footer with lighter credit name */
   footer{
@@ -130,6 +133,20 @@
     display:flex; align-items:center; justify-content:space-between; gap:12px;
   }
   .credit strong{color:var(--muted); font-weight:600}
+
+  /* Mobile tweaks */
+  @media (max-width:900px){ .arrow{height:108px} }
+  @media (max-width:640px){
+    .header-inner{padding:10px 14px}
+    nav[aria-label="Primary"]{gap:16px}
+    nav[aria-label="Primary"] a{font-size:.95rem; padding:4px 0}
+    .social{gap:12px}
+    .social svg{width:18px; height:18px}
+    .foot{padding:12px 14px; font-size:.88rem}
+    .arrow{display:none} /* hide arrows on phones, use swipe */
+    .track{gap:24px; padding:0 12px}
+    .slide{--slideW: clamp(220px, 72vw, 420px)}
+  }
 </style>
 </head>
 <body>
@@ -268,6 +285,15 @@
     if(e.key==='ArrowRight') go(1);
     if(e.key==='ArrowLeft')  go(-1);
   }, { passive: true });
+
+  // Touch swipe for mobile
+  let startX = 0, deltaX = 0;
+  viewport.addEventListener('touchstart', (e)=>{ startX = e.touches[0].clientX; deltaX = 0; }, {passive:true});
+  viewport.addEventListener('touchmove',  (e)=>{ deltaX = e.touches[0].clientX - startX; }, {passive:true});
+  viewport.addEventListener('touchend',   ()=>{
+    if(Math.abs(deltaX) > 40){ go(deltaX < 0 ? 1 : -1); }
+    deltaX = 0;
+  }, {passive:true});
 
   apply(true);
   addEventListener('resize', ()=>apply(true), { passive: true });

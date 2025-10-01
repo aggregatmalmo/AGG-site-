@@ -94,18 +94,18 @@
     background:url("assets/hero-aggregat.jpg") center/cover no-repeat;
   }
 
+  /* Footer with right-side credit */
   footer{
     border-top:1px solid var(--line);
     background:rgba(255,255,255,.82);
     -webkit-backdrop-filter:blur(6px);
     backdrop-filter:blur(6px);
   }
-  .foot{max-width:1300px; margin:0 auto; padding:14px 22px; color:var(--muted); font-size:.92rem}
-
-  /* Respect reduced motion */
-  @media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; scroll-behavior: auto !important; }
+  .foot{
+    max-width:1300px; margin:0 auto; padding:14px 22px; color:var(--muted); font-size:.92rem;
+    display:flex; align-items:center; justify-content:space-between; gap:12px;
   }
+  .credit{white-space:nowrap}
 </style>
 </head>
 <body>
@@ -142,7 +142,10 @@
   </main>
 
   <footer>
-    <div class="foot">© AGGREGAT</div>
+    <div class="foot">
+      <span>© AGGREGAT</span>
+      <span class="credit">by <strong>BXY SANTIAGO</strong></span>
+    </div>
   </footer>
 
 <script>

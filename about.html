@@ -5,34 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>About — AGGREGAT</title>
 <meta name="description" content="About AGGREGAT — Malmö-based underground platform for events, releases, and mixes." />
+<link rel="stylesheet" href="styles.css" />
 <style>
-  :root{
-    --ink:#1a1b1f; --muted:#5b5f69; --line:#D9DBE1;
-    --pill:#ffffff; --pill-active:#0f1115; --pill-text:#ffffff;
-  }
-  *{box-sizing:border-box}
-  body{
-    margin:0; color:var(--ink);
-    background:
-      radial-gradient(1000px 700px at 55% -8%, rgba(196,208,255,.18), transparent 55%),
-      radial-gradient(900px 600px at 85% 115%, rgba(255,245,255,.20), transparent 60%),
-      linear-gradient(180deg,#F2F4F8 0%, #ECEFF5 60%, #E9EBF2 100%);
-    font-family: Arial, Helvetica, sans-serif; line-height:1.6;
-  }
-  header{
-    position:sticky; top:0; z-index:50;
-    background:rgba(247,247,249,.85); -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px);
-    border-bottom:1px solid var(--line);
-    padding:14px 22px; display:flex; justify-content:space-between; align-items:center;
-  }
-  .logo{font-weight:700; letter-spacing:.12em}
-  nav{display:flex; gap:8px}
-  nav a{
-    text-decoration:none; color:var(--ink); background:var(--pill); border:1px solid var(--line);
-    padding:6px 14px; border-radius:6px; font-weight:600; font-size:.9rem; transition:.2s;
-  }
-  nav a[aria-current="page"], nav a:hover{background:var(--pill-active); color:var(--pill-text); border-color:transparent}
-
   main{width:min(900px,92vw); margin:28px auto 80px}
   h1{margin:0 0 14px; font-size:1.9rem}
   .panel{
@@ -46,12 +20,16 @@
 </head>
 <body>
 <header>
-  <div class="logo">AGGREGAT</div>
-  <nav aria-label="Primary">
-    <a href="index.html">Home</a>
-    <a href="releases.html">Releases</a>
-    <a href="about.html" aria-current="page">About</a>
-  </nav>
+  <div class="header-inner">
+    <nav aria-label="Primary">
+      <a href="index.html">Home</a>
+      <a href="releases.html">Releases</a>
+      <a href="events.html">Events</a>
+      <a href="about.html" aria-current="page">About</a>
+    </nav>
+    <div class="brand-text">AGGREGAT</div>
+    <div class="social" aria-label="Social"></div>
+  </div>
 </header>
 
 <main>
@@ -76,6 +54,10 @@
     </ul>
   </section>
 </main>
+
+<footer>
+  <div class="foot">© AGGREGAT</div>
+</footer>
 </body>
 </html>
 

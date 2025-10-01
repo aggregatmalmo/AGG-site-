@@ -5,49 +5,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Releases — AGGREGAT</title>
 <meta name="description" content="AGGREGAT releases — compilations and EPs." />
+<link rel="stylesheet" href="styles.css" />
 <style>
-  :root{
-    --ink:#1a1b1f; --muted:#5b5f69; --line:#D9DBE1;
-    --pill:#ffffff; --pill-active:#0f1115; --pill-text:#ffffff;
-
-    --gap: 7vw;
-    --slideW: clamp(220px, 36vw, 520px);
-    --sideScale:.82;
-    --sideOpacity:.72;
-  }
-  *{box-sizing:border-box}
-  body{
-    margin:0; color:var(--ink);
-    background:
-      radial-gradient(1000px 700px at 55% -8%, rgba(196,208,255,.18), transparent 55%),
-      radial-gradient(900px 600px at 85% 115%, rgba(255,245,255,.20), transparent 60%),
-      linear-gradient(180deg,#F2F4F8 0%, #ECEFF5 60%, #E9EBF2 100%);
-    font-family: Arial, Helvetica, sans-serif; line-height:1.5;
-  }
-  header{
-    position:sticky; top:0; z-index:50;
-    background:rgba(247,247,249,.85); -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px);
-    border-bottom:1px solid var(--line);
-    padding:14px 22px; display:flex; justify-content:space-between; align-items:center;
-  }
-  .logo{font-weight:700; letter-spacing:.12em}
-  nav{display:flex; gap:8px}
-  nav a{
-    text-decoration:none; color:var(--ink); background:var(--pill); border:1px solid var(--line);
-    padding:6px 14px; border-radius:6px; font-weight:600; font-size:.9rem; transition:.2s;
-  }
-  nav a[aria-current="page"], nav a:hover{background:var(--pill-active); color:var(--pill-text); border-color:transparent}
-
   h1{margin:18px 0 6px; text-align:center; font-size:1.85rem}
-
   .carousel{position:relative; max-width:100vw; margin:8px auto 56px; overflow:hidden}
   .viewport{position:relative; width:100%}
   .track{
-    display:flex; align-items:center; gap:var(--gap);
+    display:flex; align-items:center; gap:7vw;
     will-change:transform; transform:translate3d(0,0,0); transition:transform .5s ease;
-    padding:0 calc(var(--gap)/2);
+    padding:0 calc(7vw/2);
   }
   .slide{
+    --slideW: clamp(220px, 36vw, 520px);
     width:var(--slideW); flex:0 0 var(--slideW);
     display:flex; flex-direction:column; align-items:center;
     transition:transform .5s ease, opacity .5s ease;
@@ -57,7 +26,7 @@
     box-shadow:0 10px 28px rgba(41,45,55,.12), 0 4px 12px rgba(41,45,55,.10);
   }
   .sleeve img{display:block; width:100%; height:auto}
-  .slide:not(.active){ transform:scale(var(--sideScale)); opacity:var(--sideOpacity) }
+  .slide:not(.active){ transform:scale(.82); opacity:.72 }
   .meta{display:none; margin-top:12px; text-align:center}
   .slide.active .meta{display:block}
   .cat{font-weight:700; font-size:.92rem}
@@ -65,10 +34,8 @@
   .title{color:var(--muted); margin-top:2px}
   .btn{
     display:inline-block; margin-top:.6rem; padding:.48rem 1.05rem; border-radius:6px;
-    background:var(--pill-active); color:var(--pill-text); text-decoration:none; font-weight:700; font-size:.9rem;
-    border:1px solid transparent;
+    background:#0f1115; color:#fff; text-decoration:none; font-weight:700; font-size:.9rem; border:1px solid transparent;
   }
-
   .arrow{
     position:absolute; top:50%; transform:translateY(-50%);
     width:46px; height:122px; border-radius:6px; background:rgba(15,17,21,.16);
@@ -80,22 +47,22 @@
   .arrow:hover{background:rgba(15,17,21,.26)}
   .arrow.left{left:14px}
   .arrow.right{right:14px}
-
-  @media (max-width:900px){
-    :root{ --gap: 8vw; --slideW: 74vw; --sideScale:.88; --sideOpacity:.82 }
-    .arrow{height:108px}
-  }
+  @media (max-width:900px){ .arrow{height:108px} }
   @media (max-width:640px){ .arrow{display:none} nav a{padding:5px 10px} }
 </style>
 </head>
 <body>
 <header>
-  <div class="logo">AGGREGAT</div>
-  <nav aria-label="Primary">
-    <a href="index.html">Home</a>
-    <a href="releases.html" aria-current="page">Releases</a>
-    <a href="about.html">About</a>
-  </nav>
+  <div class="header-inner">
+    <nav aria-label="Primary">
+      <a href="index.html">Home</a>
+      <a href="releases.html" aria-current="page">Releases</a>
+      <a href="events.html">Events</a>
+      <a href="about.html">About</a>
+    </nav>
+    <div class="brand-text">AGGREGAT</div>
+    <div class="social" aria-label="Social"></div>
+  </div>
 </header>
 
 <main>
@@ -154,6 +121,10 @@
   </section>
 </main>
 
+<footer>
+  <div class="foot">© AGGREGAT</div>
+</footer>
+
 <script>
   const viewport = document.getElementById('viewport');
   const track = document.getElementById('track');
@@ -164,11 +135,7 @@
   const COUNT = originals.length;
 
   function clone(where){
-    const clones = originals.map(el => {
-      const c = el.cloneNode(true);
-      c.classList.add('is-clone');
-      return c;
-    });
+    const clones = originals.map(el => { const c = el.cloneNode(true); c.classList.add('is-clone'); return c; });
     if(where==='before') clones.reverse().forEach(c=>track.insertBefore(c, track.firstChild));
     else clones.forEach(c=>track.appendChild(c));
   }

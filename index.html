@@ -7,26 +7,45 @@
 
 <style>
   :root{
-    --bg:#efeff1;        /* light grey canvas */
-    --ink:#121317;       /* text */
-    --muted:#6d7078;     /* subtle text */
-    --line:#e1e3e8;      /* hairline */
-    --underline:#111;    /* link underline */
-    --hdrH:auto;         /* set by JS for perfect hero fit */
+    --bg:#eef1f6;          /* light grey with a hint of cool blue */
+    --ink:#121317;
+    --muted:#6d7078;
+    --line:#e1e3e8;
+    --underline:#111;
+    --hdrH:auto;           /* set by JS after measuring header */
   }
 
   *{box-sizing:border-box}
   html,body{height:100%}
+  html,body{margin:0; overflow-x:hidden;}   /* no side scroll */
+
   body{
-    margin:0; color:var(--ink);
+    color:var(--ink);
     background:
-      radial-gradient(1000px 700px at 60% -10%, rgba(180,188,255,.10), transparent 55%),
-      radial-gradient(900px 650px at 15% 120%, rgba(255,245,255,.12), transparent 60%),
+      radial-gradient(1100px 760px at 62% -12%, rgba(180,196,255,.14), transparent 55%),
+      radial-gradient(900px 650px at 12% 118%, rgba(232,245,255,.16), transparent 60%),
       var(--bg);
     font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
   }
 
-  /* ===== Header: always visible, see-through ===== */
+  /* === Arian LT (local .ttf files) === */
+  @font-face{
+    font-family:'Arian LT';
+    src:url('assets/fonts/Arian LT Bold.ttf') format('truetype');
+    font-weight:700; font-style:normal;
+  }
+  @font-face{
+    font-family:'Arian LT';
+    src:url('assets/fonts/Arian LT Demi.ttf') format('truetype');
+    font-weight:600; font-style:normal;
+  }
+  @font-face{
+    font-family:'Arian LT';
+    src:url('assets/fonts/Arian LT Light.ttf') format('truetype');
+    font-weight:300; font-style:normal;
+  }
+
+  /* ===== Header (sticky, translucent) ===== */
   header{
     position:sticky; top:0; z-index:20;
     background:rgba(255,255,255,.78);
@@ -38,11 +57,8 @@
     display:grid; grid-template-columns:1fr auto 1fr; align-items:center;
   }
 
-  /* Left nav */
-  .mainnav{
-    display:flex; gap:22px; align-items:center;
-    font-weight:600; letter-spacing:.02em;
-  }
+  /* left nav */
+  .mainnav{display:flex; gap:22px; align-items:center; font-weight:600; letter-spacing:.02em;}
   .mainnav a{
     color:var(--ink); text-decoration:none; padding:6px 0; position:relative;
   }
@@ -52,46 +68,42 @@
   }
   .mainnav a:hover::after, .mainnav a.active::after{ transform:scaleX(1); }
 
-  /* Center title: ARIAN / Helvetica World bold */
-  .brand{
-    font-family: "Arian", "Helvetica World", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-weight:700;
+  /* center brand (Arian LT) */
+  .brand-text{
+    font-family:'Arian LT', sans-serif;
+    font-weight:700;              /* 600 = Demi if you prefer */
     letter-spacing:.18em;
     text-transform:uppercase;
     line-height:1; text-align:center;
     font-size:clamp(22px,2.6vw,30px);
+    text-shadow:0 1px 0 rgba(0,0,0,.25), 0 6px 12px rgba(0,0,0,.06);
   }
 
-  /* Right socials */
-  .social{ justify-self:end; display:flex; gap:16px; align-items:center; }
-  .social a{ color:var(--ink); opacity:.9; transition:opacity .2s ease; }
-  .social a:hover{ opacity:1; }
-  .social svg{ width:20px; height:20px; display:block; }
+  /* right socials */
+  .social{justify-self:end; display:flex; gap:16px; align-items:center;}
+  .social a{color:var(--ink); opacity:.9; transition:opacity .2s ease;}
+  .social a:hover{opacity:1;}
+  .social svg{width:20px; height:20px; display:block;}
 
-  /* ===== Main: hero fills viewport minus header; footer is next ===== */
+  /* ===== Stage ===== */
   main{
-    min-height: calc(100svh - var(--hdrH));
-    height: calc(100svh - var(--hdrH));
+    min-height:calc(100svh - var(--hdrH));
+    height:calc(100svh - var(--hdrH));
     display:grid; place-items:center;
   }
-
-  /* Full-bleed hero (no gutters) */
   .hero{
-    width:100vw;
+    width:100%;
     height:100%;
     background:url("assets/hero-aggregat.jpg") center center / cover no-repeat;
   }
 
-  /* Footer */
+  /* ===== Footer ===== */
   footer{
     border-top:1px solid var(--line);
     background:rgba(255,255,255,.82);
     backdrop-filter:blur(6px);
   }
-  .foot{
-    max-width:1300px; margin:0 auto; padding:14px 22px;
-    color:var(--muted); font-size:.92rem;
-  }
+  .foot{max-width:1300px; margin:0 auto; padding:14px 22px; color:var(--muted); font-size:.92rem;}
 </style>
 </head>
 <body>
@@ -105,7 +117,7 @@
         <a href="about.html">About</a>
       </nav>
 
-      <div class="brand">AGGREGAT</div>
+      <div class="brand-text">AGGREGAT</div>
 
       <div class="social" aria-label="Social">
         <!-- Instagram -->
@@ -139,7 +151,7 @@
   </footer>
 
 <script>
-  // measure header height to make hero exactly fill the rest
+  // Measure header so the hero perfectly fills the remaining viewport
   const header = document.getElementById('siteHeader');
   function setHeaderH(){
     const h = header.getBoundingClientRect().height;
